@@ -146,7 +146,7 @@
   materials:
     Steel: 600
     Plastic: 200
-  unlockUses: 2
+  unlockUses: 3
 
 - type: latheRecipe
   parent: BaseToolRecipe
@@ -154,8 +154,10 @@
   result: RCDEmpty
   completetime: 4
   materials:
-    Steel: 1000
+    Steel: 400
     Plastic: 300
+    Plasma: 100
+  unlockUses: 3
 
 - type: latheRecipe
   parent: BaseToolRecipe
@@ -164,6 +166,9 @@
   materials:
     Steel: 500
     Plastic: 250
+    Glass: 250
+    Plasma: 100
+  unlockUses: 10
 
 - type: latheRecipe
   parent: BaseBigToolRecipe

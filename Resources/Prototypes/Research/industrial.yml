@@ -172,6 +172,8 @@
     - BorgModuleAdvancedTool
     - Fulton
     - FultonBeacon
+    - RCD
+    - RCDAmmo
 
 - type: technology
   id: MassExcavation

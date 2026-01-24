@@ -109,6 +109,10 @@
       temperature: 293.15
   - type: StaticPrice
     price: 350
+  - type: PhysicalComposition
+    materialComposition:
+      Steel: 25
+      Plastic: 25
   - type: GenericVisualizer
     visuals:
       enum.ReleaseGasOnTriggerVisuals.Key:

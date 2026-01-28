@@ -1128,6 +1128,30 @@
     - !type:TileNotBlocked
 
 - type: construction
+  id: AirlockExternal
+  graph: AirlockExternal
+  startNode: start
+  targetNode: externalAirlock
+  category: construction-category-structures
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canBuildInImpassable: false
+  conditions:
+    - !type:TileNotBlocked
+
+- type: construction
+  id: AirlockExternalGlass
+  graph: AirlockExternal
+  startNode: start
+  targetNode: externalGlassAirlock
+  category: construction-category-structures
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canBuildInImpassable: false
+  conditions:
+    - !type:TileNotBlocked
+
+- type: construction
   id: PinionAirlock
   name: construction-recipe-pinion-airlock
   graph: PinionAirlock

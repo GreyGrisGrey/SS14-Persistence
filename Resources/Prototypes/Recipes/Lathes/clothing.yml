@@ -2164,3 +2164,28 @@
   id: ClothingHandsGlovesJanitor
   result: ClothingHandsGlovesJanitor
 
+- type: latheRecipe
+  parent: BaseJumpsuitRecipe
+  id: ClothingUniformJumpskirtJanimaid
+  result: ClothingUniformJumpskirtJanimaid
+
+- type: latheRecipe
+  parent: BaseJumpsuitRecipe
+  id: ClothingUniformJumpskirtJanimaidmini
+  result: ClothingUniformJumpskirtJanimaidmini
+
+- type: latheRecipe
+  parent: BaseJumpsuitRecipe
+  id: ClothingUniformJumpskirtTacticalMaid
+  result: ClothingUniformJumpskirtTacticalMaid
+
+- type: latheRecipe
+  parent: BaseCoatRecipe
+  id: ClothingOuterVestHazard
+  result: ClothingOuterVestHazard
+
+- type: latheRecipe
+  parent: BaseCoatRecipe
+  id: ClothingOuterVest
+  result: ClothingOuterVest
+

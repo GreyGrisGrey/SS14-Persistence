@@ -17,6 +17,12 @@ namespace Content.Server.Atmos.EntitySystems
 
         private readonly Stopwatch _simulationStopwatch = new();
 
+        private const int AtmosDeviceQueueTimingReportInterval = 500;
+        private long _atmosDeviceQueueTimingSamples;
+        private double _atmosDeviceQueueTimingTotalUs;
+        private double _atmosDeviceQueueTimingMinUs = double.MaxValue;
+        private double _atmosDeviceQueueTimingMaxUs;
+
         /// <summary>
         ///     Check current execution time every n instances processed.
         /// </summary>
@@ -588,11 +594,34 @@ namespace Content.Server.Atmos.EntitySystems
             var atmosphere = ent.Comp1;
             if (!atmosphere.ProcessingPaused)
             {
+                var queueStopwatch = System.Diagnostics.Stopwatch.StartNew();
+
+
                 atmosphere.CurrentRunAtmosDevices.Clear();
                 atmosphere.CurrentRunAtmosDevices.EnsureCapacity(atmosphere.AtmosDevices.Count);
                 foreach (var device in atmosphere.AtmosDevices)
                 {
                     atmosphere.CurrentRunAtmosDevices.Enqueue(device);
+                }
+
+                var queueElapsedUs = queueStopwatch.Elapsed.TotalSeconds * 1_000_000d;
+                _atmosDeviceQueueTimingSamples++;
+                _atmosDeviceQueueTimingTotalUs += queueElapsedUs;
+                if (queueElapsedUs < _atmosDeviceQueueTimingMinUs)
+                    _atmosDeviceQueueTimingMinUs = queueElapsedUs;
+                if (queueElapsedUs > _atmosDeviceQueueTimingMaxUs)
+                    _atmosDeviceQueueTimingMaxUs = queueElapsedUs;
+
+                if (_atmosDeviceQueueTimingSamples % AtmosDeviceQueueTimingReportInterval == 0)
+                {
+                    var avg = _atmosDeviceQueueTimingTotalUs / _atmosDeviceQueueTimingSamples;
+                    Log.Info(
+                        $"Atmos device queue timing: samples={_atmosDeviceQueueTimingSamples} min={_atmosDeviceQueueTimingMinUs:0.###}us max={_atmosDeviceQueueTimingMaxUs:0.###}us avg={avg:0.###}us");
+
+                    _atmosDeviceQueueTimingSamples = 0;
+                    _atmosDeviceQueueTimingTotalUs = 0;
+                    _atmosDeviceQueueTimingMinUs = double.MaxValue;
+                    _atmosDeviceQueueTimingMaxUs = 0;
                 }
             }
 

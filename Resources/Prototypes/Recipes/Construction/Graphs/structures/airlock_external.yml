@@ -1,5 +1,5 @@
 - type: constructionGraph
-  id: none
+  id: AirlockExternal
   start: start
   graph:
   - node: start
@@ -46,9 +46,9 @@
       conditions:
       - !type:EntityAnchored {}
       steps:
-      - component: DoorElectronics
+      - tag: DoorElectronics
         store: board
-        name: construction-graph-component-door-electronics-circuit-board
+        name: construction-graph-tag-door-electronics-circuit-board
         icon:
           sprite: "Objects/Misc/module.rsi"
           state: "door_electronics"
@@ -64,7 +64,7 @@
 
   - node: electronics
     edges:
-    - to: externalAirlock
+    - to: airlock
       conditions:
       - !type:EntityAnchored {}
       steps:
@@ -89,9 +89,9 @@
         doAfter: 5
 
   - node: glassElectronics
-    entity: AirlockAssemblyExternal
+    entity: AirlockAssemblyExternalGlass
     edges:
-    - to: externalGlassAirlock
+    - to: glassAirlock
       conditions:
       - !type:EntityAnchored {}
       steps:
@@ -114,10 +114,8 @@
       - tool: Prying
         doAfter: 5
 
-
-# Finished airlocks
-  #glass
-  - node: externalGlassAirlock
+## Glass airlock
+  - node: glassAirlock
     entity: AirlockExternalGlass
     doNotReplaceInheritingEntities: true
     actions:
@@ -140,8 +138,8 @@
       - tool: Prying
         doAfter: 2
 
-  #normal
-  - node: externalAirlock
+## Standard airlock
+  - node: airlock
     entity: AirlockExternal
     doNotReplaceInheritingEntities: true
     actions:

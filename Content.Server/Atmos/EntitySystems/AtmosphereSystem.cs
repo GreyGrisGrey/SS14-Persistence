@@ -13,6 +13,7 @@ using Robust.Shared.Containers;
 using Robust.Shared.Map;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Map.Events;
 using System.Linq;
 using Content.Shared.Damage.Systems;
 using Robust.Shared.Threading;
@@ -71,6 +72,7 @@ public sealed partial class AtmosphereSystem : SharedAtmosphereSystem
 
         SubscribeLocalEvent<TileChangedEvent>(OnTileChanged);
         SubscribeLocalEvent<PrototypesReloadedEventArgs>(OnPrototypesReloaded);
+        SubscribeLocalEvent<BeforeSerializationEvent>(OnBeforeSerialization);
 
         CacheDecals();
     }
@@ -126,5 +128,22 @@ public sealed partial class AtmosphereSystem : SharedAtmosphereSystem
     private void CacheDecals()
     {
         _burntDecals = _protoMan.EnumeratePrototypes<DecalPrototype>().Where(x => x.Tags.Contains("burnt")).Select(x => x.ID).ToArray();
+    }
+
+    private void OnBeforeSerialization(BeforeSerializationEvent ev)
+    {
+        var query = EntityQueryEnumerator<GridAtmosphereComponent, TransformComponent>();
+        while (query.MoveNext(out _, out var atmosphere, out var xform))
+        {
+            if (!ev.MapIds.Contains(xform.MapID))
+                continue;
+
+            atmosphere.AtmosDevicesOrder.Clear();
+            atmosphere.AtmosDevicesOrder.EnsureCapacity(atmosphere.AtmosDevices.Count);
+            foreach (var device in atmosphere.AtmosDevices)
+            {
+                atmosphere.AtmosDevicesOrder.Add(device.Owner);
+            }
+        }
     }
 }

@@ -102,6 +102,14 @@ namespace Content.Server.Atmos.Components
         [ViewVariables]
         public readonly HashSet<Entity<AtmosDeviceComponent>> AtmosDevices = new();
 
+        /// <summary>
+        /// Serialized list of atmos devices in the same order used to build the processing queue.
+        /// Populated right before map serialization.
+        /// </summary>
+        [ViewVariables]
+        [DataField("atmosDevicesOrder")]
+        public List<EntityUid> AtmosDevicesOrder = new();
+
         [ViewVariables]
         public readonly Queue<TileAtmosphere> CurrentRunTiles = new();
 

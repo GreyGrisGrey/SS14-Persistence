@@ -560,11 +560,21 @@ public partial class AtmosphereSystem
         if (!_atmosQuery.Resolve(grid, ref grid.Comp, false))
             return false;
 
-        if (!grid.Comp.AtmosDevices.Add(device))
-            return false;
+        //Try to add the device to the queue (Returns false if device was already in there or if something else went wrong)
+        if (grid.Comp.AtmosDevices.Add(device))
+        {
+            device.Comp.JoinedGrid = grid;
+            return true;
+        }
 
-        device.Comp.JoinedGrid = grid;
-        return true;
+        //Check if it's in the list
+        if (grid.Comp.AtmosDevices.Contains(device))
+        {
+            device.Comp.JoinedGrid = grid;
+            return true;
+        }
+
+        return false;
     }
 
     /// <summary>

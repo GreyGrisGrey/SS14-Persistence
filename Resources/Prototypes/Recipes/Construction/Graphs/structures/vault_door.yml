@@ -41,10 +41,10 @@
 
   - node: reinforce
     entity: AirlockAssemblyHighSec
-    conditions:
-      - !type:EntityAnchored {}
     edges:
     - to: wiring
+      conditions:
+      - !type:EntityAnchored {}
       steps:
       - tool: Screwing
         doAfter: 2
@@ -64,10 +64,10 @@
 
   - node: wiring
     entity: AirlockAssemblyHighSec
-    conditions:
-      - !type:EntityAnchored {}
     edges:
     - to: electronics
+      conditions:
+      - !type:EntityAnchored {}
       steps:
       - material: Cable
         amount: 5
@@ -87,10 +87,10 @@
 
   - node: electronics
     entity: AirlockAssemblyHighSec
-    conditions:
-      - !type:EntityAnchored {}
     edges:
     - to: vaultdoor
+      conditions:
+      - !type:EntityAnchored {}
       steps:
       - component: DoorElectronics
         store: board

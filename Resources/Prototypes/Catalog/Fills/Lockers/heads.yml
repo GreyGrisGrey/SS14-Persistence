@@ -63,7 +63,7 @@
     - id: BoxCaptainCircuitboards
     - id: DoorRemoteCustom
     - id: MedalCase
-    - id: NukeDisk
+#    - id: NukeDisk # Persistence: no nuke, no disk
     - id: PinpointerNuclear
     - id: PlushieNuke
       prob: 0.1

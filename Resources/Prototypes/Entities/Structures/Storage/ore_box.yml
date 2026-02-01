@@ -59,6 +59,10 @@
       tags:
       - ArtifactFragment
       - Ore
+  - type: DumpTarget
+  - type: Tag
+    tags:
+    - OreBox
   - type: UserInterface
     interfaces:
       enum.StorageUiKey.Key:

@@ -1052,6 +1052,9 @@
 - type: Tag
   id: OreUranium # CargoBounty: BountySalvageOreUranium
 
+- type: Tag
+  id: OreBox # DumpWhitelist target: OreBag
+
 ## P ##
 
 - type: Tag

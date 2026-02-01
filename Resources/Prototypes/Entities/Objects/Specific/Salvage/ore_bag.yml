@@ -26,6 +26,9 @@
         - ArtifactFragment
         - Ore
   - type: Dumpable
+    dumpWhitelist:
+      tags:
+      - OreBox
 
 - type: entity
   parent: OreBag

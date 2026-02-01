@@ -1,5 +1,4 @@
 using Content.Server.Solar.EntitySystems;
-using Content.Server.StationEvents.Events;
 
 namespace Content.Server.Solar.Components
 {

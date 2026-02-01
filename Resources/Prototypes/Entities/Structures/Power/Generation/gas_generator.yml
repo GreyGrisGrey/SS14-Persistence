@@ -62,6 +62,7 @@
       fuelSlipRate: 0.1
       wasteGas1Ratio: 2.0
       wasteGas2Ratio: 1.0
+      combustionEnergyPerMole: 336000 # 60% of 560 kJ/mol (methane combustion energy waste heat)
       maxOutput: 100000
       maxFuelConsumptionRate: 10.0
       maxInternalPressure: 150

@@ -142,6 +142,14 @@ public sealed partial class GasGeneratorComponent : Component
     public float FuelSlipRate = 0.1f;
 
     /// <summary>
+    /// Combustion energy released per mole of primary fuel consumed (in Joules).
+    /// This determines exhaust temperature. Default is FireMethaneEnergyReleased (560 kJ/mol).
+    /// Can be customized per generator type in YAML for different fuel reactions.
+    /// </summary>
+    [DataField("combustionEnergyPerMole")]
+    public float CombustionEnergyPerMole = 560000f; // 560 kJ/mol (methane default)
+
+    /// <summary>
     /// Molar ratio of WasteGas1 produced per mole of primary fuel consumed.
     /// For CH4 combustion: H2O is produced at 2:1 ratio.
     /// </summary>

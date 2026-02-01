@@ -451,6 +451,12 @@
             True: { visible: true }
             False: { visible: false }
 
+    - type: NodeContainer
+      examinable: true
+      nodes:
+        output:
+          !type:CableDeviceNode
+          nodeGroupID: HVPower
     - type: Machine
       board: PortableGeneratorMegamanMachineCircuitboard
     - type: FuelGenerator

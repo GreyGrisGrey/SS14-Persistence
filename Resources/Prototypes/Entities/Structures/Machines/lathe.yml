@@ -585,6 +585,17 @@
   name: ore processor
   description: It produces sheets and ingots using ores.
   components:
+    - type: Fixtures
+      fixtures:
+        fix1:
+          shape:
+            !type:PhysShapeAabb
+            bounds: "-0.4,-0.4,0.4,0.4"
+          density: 200
+          mask:
+          - MachineMask
+          layer:
+          - MachineLayer
     - type: Sprite
       sprite: Structures/Machines/ore_processor.rsi
       layers:
@@ -611,6 +622,10 @@
       staticPacks:
       - OreSmelting
       - RGlassSmelting
+    - type: DumpTarget
+    - type: Tag
+      tags:
+        - OreProcessor
 
 - type: entity
   parent: BaseLathe
@@ -618,6 +633,17 @@
   name: industrial ore processor
   description: An ore processor specifically designed for mass-producing metals in industrial applications.
   components:
+    - type: Fixtures
+      fixtures:
+        fix1:
+          shape:
+            !type:PhysShapeAabb
+            bounds: "-0.4,-0.4,0.4,0.4"
+          density: 200
+          mask:
+          - MachineMask
+          layer:
+          - MachineLayer
     - type: Sprite
       sprite: Structures/Machines/ore_processor_industrial.rsi
       layers:
@@ -647,6 +673,10 @@
       - OreSmelting
       - RGlassSmelting
       - AdvancedSmelting
+    - type: DumpTarget
+    - type: Tag
+      tags:
+        - OreProcessor
 
 - type: entity
   parent: BaseLathe

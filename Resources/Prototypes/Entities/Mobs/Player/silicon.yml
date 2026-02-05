@@ -319,7 +319,7 @@
       board:
       - StationAiCoreElectronics
   - type: StaticPrice
-    price: 5000
+    price: 1500
 
 # The job-ready version of an AI spawn.
 - type: entity

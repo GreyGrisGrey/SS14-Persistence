@@ -329,7 +329,7 @@
     entity: FoodHivelordRemainsInert
     stage: 1
   - type: StaticPrice
-    price: 5000
+    price: 2000
   - type: Tag
     tags:
     - HivelordRemains

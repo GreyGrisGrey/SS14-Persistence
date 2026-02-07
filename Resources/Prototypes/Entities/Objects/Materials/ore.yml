@@ -82,7 +82,7 @@
       diamondore:
         reagents:
         - ReagentId: Carbon
-          Quantity: 15
+          Quantity: 13
   - type: Item
     heldPrefix: diamond
 

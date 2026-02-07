@@ -135,14 +135,15 @@ public sealed class CharacterUIController : UIController, IOnStateEntered<Gamepl
             return;
         }
 
-        var (entity, job, objectives, briefing, detailExaminable, entityName) = data;
+        var (entity, job, faction, bankBal, objectives, briefing, detailExaminable, entityName) = data;
 
         _window.SpriteView.SetEntity(entity);
 
         UpdateRoleType();
 
         _window.NameLabel.Text = entityName;
-        _window.SubText.Text = job;
+        _window.SubText.Text = (faction != null) ? job + " | " + faction : job; // If off-duty don't show faction
+        _window.SubTextBankBal.Text = bankBal;
         _window.Objectives.RemoveAllChildren();
         _window.ObjectivesLabel.Visible = objectives.Any();
 
@@ -206,7 +207,7 @@ public sealed class CharacterUIController : UIController, IOnStateEntered<Gamepl
             _window.Objectives.AddChild(control);
         }
 
-        _window.RolePlaceholder.Visible = briefing == null && !controls.Any() && !objectives.Any();
+        _window.RolePlaceholder.Visible = false;  // Persistence: briefing == null && !controls.Any() && !objectives.Any(); < false;
     }
 
     private void OnRoleTypeChanged(MindRoleTypeChangedEvent ev, EntitySessionEventArgs _)

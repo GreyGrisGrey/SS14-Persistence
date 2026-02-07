@@ -1,6 +1,8 @@
 ﻿using Content.Server.Mind;
 using Content.Server.Roles;
 using Content.Server.Roles.Jobs;
+using Content.Server._NF.Bank;
+using Content.Server.CrewAssignments.Systems;
 using Content.Shared.CharacterInfo;
 using Content.Shared.DetailExaminable;
 using Content.Shared.Objectives;
@@ -15,6 +17,8 @@ public sealed class CharacterInfoSystem : EntitySystem
     [Dependency] private readonly MindSystem _minds = default!;
     [Dependency] private readonly RoleSystem _roles = default!;
     [Dependency] private readonly SharedObjectivesSystem _objectives = default!;
+    [Dependency] private readonly BankSystem _bank = default!;
+    [Dependency] private readonly JobNetSystem _jobNet = default!;
 
     public override void Initialize()
     {
@@ -33,7 +37,13 @@ public sealed class CharacterInfoSystem : EntitySystem
         var entity = args.SenderSession.AttachedEntity.Value;
 
         var objectives = new Dictionary<string, List<ObjectiveInfo>>();
-        var jobTitle = Loc.GetString("character-info-no-profession");
+
+        var (jobTitle, faction) = _jobNet.GetJobNetStrings(entity); // Persistence: Job & faction names from implant
+        if (jobTitle == null)
+            jobTitle = Loc.GetString("character-info-off-duty");
+
+        _bank.TryGetBalance(entity, out var bankBal);
+
         string? briefing = null;
         if (_minds.TryGetMind(entity, out var mindId, out var mind))
         {
@@ -60,7 +70,16 @@ public sealed class CharacterInfoSystem : EntitySystem
 
         var detailExaminable = EnsureComp<DetailExaminableComponent>(entity, out var detail) ? detail.Content : Loc.GetString("flavor-text-placeholder");
 
-        RaiseNetworkEvent(new CharacterInfoEvent(GetNetEntity(entity), jobTitle, objectives, briefing, detailExaminable), args.SenderSession);
+        RaiseNetworkEvent(new CharacterInfoEvent(
+            GetNetEntity(entity),
+            jobTitle,
+            faction,
+            "$" + bankBal.ToString(),
+            objectives,
+            briefing,
+            detailExaminable),
+            args.SenderSession
+        );
 
         Dirty(entity, detail);
     }

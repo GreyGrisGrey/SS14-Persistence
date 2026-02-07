@@ -1,5 +1,6 @@
 using System.Linq;
 using Content.Client.CharacterInfo;
+using Content.Shared.CharacterInfo;
 using Content.Client.Gameplay;
 using Content.Client.Stylesheets;
 using Content.Client.UserInterface.Controls;
@@ -53,6 +54,7 @@ public sealed class CharacterUIController : UIController, IOnStateEntered<Gamepl
 
         _window.OnClose += DeactivateButton;
         _window.OnOpen += ActivateButton;
+        _window.DetailExaminableSubmitButton.OnPressed += OnDetailExaminableSubmit;
 
         CommandBinds.Builder
             .Bind(ContentKeyFunctions.OpenCharacterMenu,
@@ -64,6 +66,9 @@ public sealed class CharacterUIController : UIController, IOnStateEntered<Gamepl
     {
         if (_window != null)
         {
+            _window.OnClose -= DeactivateButton;
+            _window.OnOpen -= ActivateButton;
+            _window.DetailExaminableSubmitButton.OnPressed -= OnDetailExaminableSubmit;
             _window.Close();
             _window = null;
         }
@@ -130,7 +135,7 @@ public sealed class CharacterUIController : UIController, IOnStateEntered<Gamepl
             return;
         }
 
-        var (entity, job, objectives, briefing, entityName) = data;
+        var (entity, job, objectives, briefing, detailExaminable, entityName) = data;
 
         _window.SpriteView.SetEntity(entity);
 
@@ -140,6 +145,11 @@ public sealed class CharacterUIController : UIController, IOnStateEntered<Gamepl
         _window.SubText.Text = job;
         _window.Objectives.RemoveAllChildren();
         _window.ObjectivesLabel.Visible = objectives.Any();
+
+        if (detailExaminable != null)
+        {
+            _window.DetailExaminableTextEdit.TextRope = new Rope.Leaf(detailExaminable);
+        }
 
         foreach (var (groupId, conditions) in objectives)
         {
@@ -254,5 +264,14 @@ public sealed class CharacterUIController : UIController, IOnStateEntered<Gamepl
             _characterInfo.RequestCharacterInfo();
             _window.Open();
         }
+    }
+
+    private void OnDetailExaminableSubmit(ButtonEventArgs args)
+    {
+        if (_window == null)
+            return;
+
+        var text = Rope.Collapse(_window.DetailExaminableTextEdit.TextRope).Trim();
+        _characterInfo.UpdateDetailExaminable(text);
     }
 }

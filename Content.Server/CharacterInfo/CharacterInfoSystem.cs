@@ -2,6 +2,7 @@
 using Content.Server.Roles;
 using Content.Server.Roles.Jobs;
 using Content.Shared.CharacterInfo;
+using Content.Shared.DetailExaminable;
 using Content.Shared.Objectives;
 using Content.Shared.Objectives.Components;
 using Content.Shared.Objectives.Systems;
@@ -20,6 +21,7 @@ public sealed class CharacterInfoSystem : EntitySystem
         base.Initialize();
 
         SubscribeNetworkEvent<RequestCharacterInfoEvent>(OnRequestCharacterInfoEvent);
+        SubscribeNetworkEvent<UpdateDetailExaminableEvent>(OnUpdateDetailExaminableEvent);
     }
 
     private void OnRequestCharacterInfoEvent(RequestCharacterInfoEvent msg, EntitySessionEventArgs args)
@@ -56,6 +58,20 @@ public sealed class CharacterInfoSystem : EntitySystem
             briefing = _roles.MindGetBriefing(mindId);
         }
 
-        RaiseNetworkEvent(new CharacterInfoEvent(GetNetEntity(entity), jobTitle, objectives, briefing), args.SenderSession);
+        var detailExaminable = EnsureComp<DetailExaminableComponent>(entity, out var detail) ? detail.Content : Loc.GetString("flavor-text-placeholder");
+
+        RaiseNetworkEvent(new CharacterInfoEvent(GetNetEntity(entity), jobTitle, objectives, briefing, detailExaminable), args.SenderSession);
+
+        Dirty(entity, detail);
+    }
+
+    private void OnUpdateDetailExaminableEvent(UpdateDetailExaminableEvent msg, EntitySessionEventArgs args)
+    {
+        if (args.SenderSession.AttachedEntity is not { } entity)
+            return;
+
+        var detail = EnsureComp<DetailExaminableComponent>(entity);
+        detail.Content = msg.Content;
+        Dirty(entity, detail);
     }
 }

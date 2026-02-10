@@ -18,7 +18,7 @@ namespace Content.Server.DeviceLinking.Components
         [DataField("boltPort", customTypeSerializer: typeof(PrototypeIdSerializer<SinkPortPrototype>))]
         public string BoltSink = "DoorBolt";
 
-        [DataField("onOpenPort", customTypeSerializer: typeof(PrototypeIdSerializer<SourcePortPrototype>))]
+        [DataField("statusPort", customTypeSerializer: typeof(PrototypeIdSerializer<SourcePortPrototype>))]
         public string StatusSource = "DoorStatus";
     }
 }

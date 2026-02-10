@@ -39,47 +39,34 @@ namespace Content.Server.DeviceLinking.Systems
             var state = SignalState.Momentary;
             args.Data?.TryGetValue(DeviceNetworkConstants.LogicState, out state);
 
-
-            if (args.Port == component.OpenPort)
+            // A special "fuzzy" helper state, which equates to either High or Momentary(pulse signal).
+            // Used for signals that respond on prompt rather than sustained.
+            bool fuzzyState = state == SignalState.High || state == SignalState.Momentary;
+            switch (args.Port)
             {
-                if (state == SignalState.High || state == SignalState.Momentary)
-                {
-                    if (door.State == DoorState.Closed)
-                        _doorSystem.TryOpen(uid, door);
-                }
-            }
-            else if (args.Port == component.ClosePort)
-            {
-                if (state == SignalState.High || state == SignalState.Momentary)
-                {
-                    if (door.State == DoorState.Open)
-                        _doorSystem.TryClose(uid, door);
-                }
-            }
-            else if (args.Port == component.TogglePort)
-            {
-                if (state == SignalState.High || state == SignalState.Momentary)
-                {
+                case var port when port == component.OpenPort && door.State == DoorState.Closed && fuzzyState:
+                    _doorSystem.TryOpen(uid, door);
+                    break;
+                case var port when port == component.ClosePort && door.State == DoorState.Open && fuzzyState:
+                    _doorSystem.TryClose(uid, door);
+                    break;
+                case var port when port == component.TogglePort && fuzzyState:
                     _doorSystem.TryToggleDoor(uid, door);
-                }
-            }
-            else if (args.Port == component.InBolt)
-            {
-                if (!TryComp<DoorBoltComponent>(uid, out var bolts))
-                    return;
-
-                // if its a pulse toggle, otherwise set bolts to high/low
-                bool bolt;
-                if (state == SignalState.Momentary)
-                {
-                    bolt = !bolts.BoltsDown;
-                }
-                else
-                {
-                    bolt = state == SignalState.High;
-                }
-
-                _doorSystem.SetBoltsDown((uid, bolts), bolt);
+                    break;
+                case var port when port == component.InBolt && TryComp<DoorBoltComponent>(uid, out var bolts):
+                    switch (state)
+                    {
+                        case SignalState.Momentary:
+                            _doorSystem.SetBoltsDown((uid, bolts), !bolts.BoltsDown);
+                            break;
+                        case SignalState.High:
+                            _doorSystem.SetBoltsDown((uid, bolts), true);
+                            break;
+                        case SignalState.Low:
+                            _doorSystem.SetBoltsDown((uid, bolts), false);
+                            break;
+                    }
+                    break;
             }
         }
 

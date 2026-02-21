@@ -154,3 +154,206 @@
         behaviors:
           - !type:DoActsBehavior
             acts: [ "Destruction" ]
+
+#HoloRCD holograms
+
+# Holo Walls
+
+- type: entity
+  id: HoloWallBlue  # Changed ID so it doesn't conflict with the sign
+  name: holographic wall
+  description: A flickering blue projection of a wall.
+  placement:
+    mode: SnapgridCenter
+  components:
+    - type: Physics
+      bodyType: Static
+      canCollide: true
+    - type: Sprite
+      sprite: Structures/Walls/solid.rsi # The path to standard wall textures
+      drawdepth: Overlays
+      layers:
+      - state: full # The "icon" for a wall is just 'wall'
+        shader: hologram # This adds the flickering effect
+        color: "#00f2ff99" # Adjusts the color to a ghostly blue
+    - type: PointLight
+      enabled: true
+      radius: 1
+      color: blue
+    - type: Damageable
+      damageContainer: Inorganic
+    - type: Destructible
+      thresholds:
+        - trigger:
+            !type:DamageTrigger
+            damage: 1
+          behaviors:
+            - !type:DoActsBehavior
+              acts: [ "Destruction" ]
+    - type: Clickable
+
+- type: entity
+  id: HoloWallRed  # Changed ID so it doesn't conflict with the sign
+  name: holographic wall
+  description: A flickering red projection of a wall.
+  placement:
+    mode: SnapgridCenter
+  components:
+    - type: Physics
+      bodyType: Static
+      canCollide: true
+    - type: Sprite
+      sprite: Structures/Walls/solid.rsi # The path to standard wall textures
+      drawdepth: Overlays
+      layers:
+      - state: full # The "icon" for a wall is just 'wall'
+        shader: hologram # This adds the flickering effect
+        color: "#ff000099" # Adjusts the color to a ghostly red
+    - type: PointLight
+      enabled: true
+      radius: 1
+      color: red
+    - type: Damageable
+      damageContainer: Inorganic
+    - type: Destructible
+      thresholds:
+        - trigger:
+            !type:DamageTrigger
+            damage: 1
+          behaviors:
+            - !type:DoActsBehavior
+              acts: [ "Destruction" ]
+    - type: Clickable
+
+- type: entity
+  id: HoloGrille  # Changed ID so it doesn't conflict with the sign
+  name: holographic grille
+  description: A flickering blue projection of a grille.
+  placement:
+    mode: SnapgridCenter
+  components:
+    - type: Physics
+      bodyType: Static
+      canCollide: true
+    - type: Sprite
+      sprite: Structures/Walls/grille.rsi # The path to standard wall textures
+      drawdepth: Overlays
+      layers:
+      - state: grille # The "icon" for a wall is just 'wall'
+        shader: hologram # This adds the flickering effect
+        color: "#00f2ff99" # Adjusts the color to a ghostly blue
+    - type: PointLight
+      enabled: true
+      radius: 1
+      color: blue
+    - type: Damageable
+      damageContainer: Inorganic
+    - type: Destructible
+      thresholds:
+        - trigger:
+            !type:DamageTrigger
+            damage: 1
+          behaviors:
+            - !type:DoActsBehavior
+              acts: [ "Destruction" ]
+    - type: Clickable
+
+- type: entity
+  id: HoloWindow  # Changed ID so it doesn't conflict with the sign
+  name: holographic window
+  description: A flickering blue projection of a window.
+  placement:
+    mode: SnapgridCenter
+  components:
+    - type: Physics
+      bodyType: Static
+      canCollide: true
+    - type: Sprite
+      sprite: Structures/Windows/window.rsi # The path to standard wall textures
+      drawdepth: Overlays
+      layers:
+      - state: full # The "icon" for a window is just 'window'
+        shader: hologram # This adds the flickering effect
+        color: "#00f2ff99" # Adjusts the color to a ghostly blue
+    - type: PointLight
+      enabled: true
+      radius: 1
+      color: blue
+    - type: Damageable
+      damageContainer: Inorganic
+    - type: Destructible
+      thresholds:
+        - trigger:
+            !type:DamageTrigger
+            damage: 1
+          behaviors:
+            - !type:DoActsBehavior
+              acts: [ "Destruction" ]
+    - type: Clickable
+
+- type: entity
+  id: HoloWindowDirectional  # Changed ID so it doesn't conflict with the sign
+  name: holographic Directional window
+  description: A flickering blue projection of a directional window.
+  placement:
+    mode: SnapgridCenter
+  components:
+    - type: Physics
+      bodyType: Static
+      canCollide: true
+    - type: Sprite
+      sprite: Structures/Windows/directional.rsi # The path to standard wall textures
+      drawdepth: Overlays
+      layers:
+      - state: window # The "icon" for a window is just 'window'
+        shader: hologram # This adds the flickering effect
+        color: "#00f2ff99" # Adjusts the color to a ghostly blue
+    - type: PointLight
+      enabled: true
+      radius: 1
+      color: blue
+    - type: Damageable
+      damageContainer: Inorganic
+    - type: Destructible
+      thresholds:
+        - trigger:
+            !type:DamageTrigger
+            damage: 1
+          behaviors:
+            - !type:DoActsBehavior
+              acts: [ "Destruction" ]
+    - type: Clickable
+
+# Holo Airlock
+
+- type: entity
+  id: HoloAirlock
+  name: holographic airlock
+  description: A flickering blue projection of an airlock.
+  placement:
+    mode: SnapgridCenter
+  components:
+    - type: Physics
+      bodyType: Static
+      canCollide: true
+    - type: Sprite
+      sprite: Structures/Doors/Airlocks/Standard/basic.rsi
+      drawdepth: Overlays
+      layers:
+      - state: closed
+        color: "#00f2ff99"
+    - type: PointLight
+      enabled: true
+      radius: 1
+      color: blue
+    - type: Damageable
+      damageContainer: Inorganic
+    - type: Destructible
+      thresholds:
+        - trigger:
+            !type:DamageTrigger
+            damage: 1
+          behaviors:
+            - !type:DoActsBehavior
+              acts: [ "Destruction" ]
+    - type: Clickable

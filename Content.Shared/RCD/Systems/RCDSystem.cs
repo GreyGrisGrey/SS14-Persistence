@@ -325,21 +325,23 @@ public sealed class RCDSystem : EntitySystem
         var charges = _sharedCharges.GetCurrentCharges(uid);
 
         // Both of these were messages were suppose to be predicted, but HasInsufficientCharges wasn't being checked on the client for some reason?
-        if (charges == 0)
+        if (prototype.Cost > 0)
         {
-            if (popMsgs)
-                _popup.PopupClient(Loc.GetString("rcd-component-no-ammo-message"), uid, user);
+            if (charges == 0)
+            {
+                if (popMsgs)
+                    _popup.PopupClient(Loc.GetString("rcd-component-no-ammo-message"), uid, user);
 
-            return false;
-        }
+                return false;
+            }
 
-        if (prototype.Cost > charges)
-        {
-            if (popMsgs)
-                _popup.PopupClient(Loc.GetString("rcd-component-insufficient-ammo-message"), uid, user);
+            if (prototype.Cost > charges)
+            {
+                if (popMsgs)
+                    _popup.PopupClient(Loc.GetString("rcd-component-insufficient-ammo-message"), uid, user);
 
-            return false;
-        }
+                return false;
+            }}
 
         // Exit if the target / target location is obstructed
         var unobstructed = (target == null)

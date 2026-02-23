@@ -321,7 +321,9 @@
   prototype: HoloWindow
   cost: 0
   delay: 1
-  collisionMask: FullTileMask
+  collisionMask: Impassable
+  rules:
+    - IsWindow
   rotation: Fixed
   fx: EffectRCDConstruct2
 
@@ -333,7 +335,7 @@
   prototype: HoloWindowDirectional
   cost: 0
   delay: 1
-  collisionMask: FullTileMask
+  collisionMask: Impassable
   collisionBounds: "-0.23,-0.49,0.23,-0.36"
   rules:
     - IsWindow

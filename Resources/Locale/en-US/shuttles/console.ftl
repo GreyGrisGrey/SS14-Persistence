@@ -22,6 +22,11 @@ shuttle-console-damping-cruise = Cruise
 shuttle-console-damping-normal = Normal
 shuttle-console-damping-anchor = Anchor
 
+shuttle-console-sort-label = Sort
+shuttle-console-sort-none = None
+shuttle-console-sort-ship = Ship
+shuttle-console-sort-station = Station
+
 shuttle-console-unknown = Unknown
 shuttle-console-iff-label = {$name} ({$distance}m)
 shuttle-console-exclusion = Exclusion area

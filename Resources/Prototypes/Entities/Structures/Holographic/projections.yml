@@ -166,8 +166,6 @@
   placement:
     mode: SnapgridCenter
   components:
-    - type: TimedDespawn
-      lifetime: 180
     - type: Physics
       bodyType: Static
       canCollide: false
@@ -210,8 +208,6 @@
   placement:
     mode: SnapgridCenter
   components:
-    - type: TimedDespawn
-      lifetime: 180
     - type: Physics
       bodyType: Static
       canCollide: false
@@ -254,8 +250,6 @@
   placement:
     mode: SnapgridCenter
   components:
-    - type: TimedDespawn
-      lifetime: 180
     - type: Physics
       bodyType: Static
       canCollide: false
@@ -298,8 +292,6 @@
   placement:
     mode: SnapgridCenter
   components:
-    - type: TimedDespawn
-      lifetime: 180
     - type: Physics
       bodyType: Static
       canCollide: false
@@ -342,8 +334,6 @@
   placement:
     mode: SnapgridCenter
   components:
-    - type: TimedDespawn
-      lifetime: 180
     - type: Physics
       bodyType: Static
       canCollide: false
@@ -388,8 +378,6 @@
   placement:
     mode: SnapgridCenter
   components:
-    - type: TimedDespawn
-      lifetime: 180
     - type: Physics
       bodyType: Static
       canCollide: false

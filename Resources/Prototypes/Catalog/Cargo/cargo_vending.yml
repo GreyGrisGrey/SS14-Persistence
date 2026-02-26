@@ -266,9 +266,9 @@
   category: cargoproduct-category-name-service
   group: market
 
-## PERSISTANCE - The vendors themselves
+## PERSISTENCE - The vendors themselves
 
-## I have arbitrairaly decided to add 300 more cost than the restocks because you're paying for the vendor itself too
+## Arbitrarily increased cost by 300 more than the restocks because you're paying for the vendor itself too
 
 - type: cargoProduct
   id: VendingMachineBooze

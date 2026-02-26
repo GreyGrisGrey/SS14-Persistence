@@ -379,9 +379,9 @@
         minScale: 1
         effectProto: StatusEffectSeeingRainbow
         type: Add
-        time: 100
+        time: 33.3
       - !type:Drunk
-        boozePower: 100
+        boozePower: 33.3
         minScale: 1
       - !type:PopupMessage
         type: Local

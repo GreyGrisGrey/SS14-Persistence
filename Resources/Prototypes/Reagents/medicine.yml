@@ -1432,7 +1432,7 @@
         type: Remove
       - !type:ModifyStatusEffect
         effectProto: StatusEffectDrunk
-        time: 20.0
+        time: 36.0
         type: Remove
       - !type:PopupMessage # we dont have sanity/mood so this will have to do
         type: Local

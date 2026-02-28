@@ -1067,3 +1067,16 @@
         tags:
         - CableCoil
   group: ScienceBounty
+
+- type: cargoBounty
+  id: BountyEggSpider
+  reward: 2500
+  description: bounty-description-egg-spider
+  idPrefix: CC
+  entries:
+  - name: bounty-item-egg-spider
+    amount: 1
+    whitelist:
+      tags:
+      - EggSpider
+  group: HunterBounty

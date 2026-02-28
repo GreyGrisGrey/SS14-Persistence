@@ -139,7 +139,7 @@
 
 - type: cargoBounty
   id: BountySpider
-  reward: 7500
+  reward: 8000
   description: bounty-description-spider
   entries:
     - name: bounty-item-spidermeat
@@ -147,6 +147,11 @@
       whitelist:
         tags:
         - SpiderMeat
+    - name: bounty-item-egg-spider
+      amount: 1
+      whitelist:
+        tags:
+        - EggSpider
   group: HunterBounty
 
 - type: cargoBounty

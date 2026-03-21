@@ -208,3 +208,37 @@
           steps:
             - tool: Prying
               doAfter: 4
+
+- type: constructionGraph
+  id: Memorial
+  start: start
+  graph:
+    - node: start
+      edges:
+        - to: memorial
+          completed:
+            - !type:SnapToGrid
+              southRotation: true
+          steps:
+            - material: Steel
+              amount: 8
+              doAfter: 5
+            - material: Silver
+              amount: 8
+              doAfter: 5
+
+    - node: memorial
+      entity: Memorial
+      edges:
+        - to: start
+          completed:
+          - !type:SpawnPrototype
+                prototype: SheetSteel1
+                amount: 8
+          - !type:SpawnPrototype
+                prototype: IngotSilver1
+                amount: 8
+          - !type:DeleteEntity {}
+          steps:
+            - tool: Screwing
+              doAfter: 5

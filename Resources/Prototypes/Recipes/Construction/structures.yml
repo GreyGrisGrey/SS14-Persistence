@@ -1610,6 +1610,18 @@
     - !type:TileNotBlocked
 
 - type: construction
+  id: Memorial
+  graph: Memorial
+  startNode: start
+  targetNode: memorial
+  category: construction-category-structures
+  placementMode: SnapgridCenter
+  objectType: Structure
+  canBuildInImpassable: false
+  conditions:
+    - !type:TileNotBlocked
+
+- type: construction
   id: BananiumDoor
   graph: DoorGraph
   startNode: start

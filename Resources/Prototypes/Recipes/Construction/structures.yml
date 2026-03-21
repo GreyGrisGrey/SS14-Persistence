@@ -1622,6 +1622,18 @@
     - !type:TileNotBlocked
 
 - type: construction
+  id: EmployeeMemorial
+  graph: EmployeeMemorial
+  startNode: start
+  targetNode: employeeMemorial
+  category: construction-category-structures
+  placementMode: SnapgridCenter
+  objectType: Structure
+  canBuildInImpassable: false
+  conditions:
+    - !type:TileNotBlocked
+
+- type: construction
   id: BananiumDoor
   graph: DoorGraph
   startNode: start

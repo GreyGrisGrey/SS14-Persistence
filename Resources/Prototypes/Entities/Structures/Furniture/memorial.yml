@@ -47,6 +47,9 @@
       drawdepth: Mobs
       noRot: true
       offset: "0.0,0.5"
+    - type: Construction
+      graph: EmployeeMemorial
+      node: employeeMemorial
 
 - type: entity
   parent: Memorial

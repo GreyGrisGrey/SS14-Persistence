@@ -242,3 +242,37 @@
           steps:
             - tool: Screwing
               doAfter: 5
+
+- type: constructionGraph
+  id: EmployeeMemorial
+  start: start
+  graph:
+    - node: start
+      edges:
+        - to: employeeMemorial
+          completed:
+            - !type:SnapToGrid
+              southRotation: true
+          steps:
+            - material: Steel
+              amount: 8
+              doAfter: 5
+            - material: Silver
+              amount: 8
+              doAfter: 5
+
+    - node: employeeMemorial
+      entity: SS13Memorial
+      edges:
+        - to: start
+          completed:
+          - !type:SpawnPrototype
+                prototype: SheetSteel1
+                amount: 8
+          - !type:SpawnPrototype
+                prototype: IngotSilver1
+                amount: 8
+          - !type:DeleteEntity {}
+          steps:
+            - tool: Screwing
+              doAfter: 5

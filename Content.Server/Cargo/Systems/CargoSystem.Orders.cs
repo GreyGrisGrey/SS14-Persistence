@@ -350,9 +350,8 @@ namespace Content.Server.Cargo.Systems
                 {
                     return;
                 }
-
                 // Invalid order
-                if (!_protoMan.HasIndex<EntityPrototype>(order.Product))
+                if (!_protoMan.Resolve(order.Product, out var product))
                 {
                     ConsolePopup(args.Actor, Loc.GetString("cargo-console-invalid-product"));
                     PlayDenySound(uid, component);
@@ -379,8 +378,6 @@ namespace Content.Server.Cargo.Systems
                     ConsolePopup(args.Actor, Loc.GetString("cargo-console-snip-snip"));
                     PlayDenySound(uid, component);
                 }
-                if (!_protoMan.Resolve(order.Product, out var product))
-                    return;
                 var cost = product.Cost * order.OrderQuantity;
                 var taxRate = order.Tax;
                 var taxPaid = (int)Math.Round((float)cost * ((float)taxRate / 100f));
@@ -464,8 +461,13 @@ namespace Content.Server.Cargo.Systems
                 {
                     return;
                 }
+                // Invalid order
                 if (!_protoMan.Resolve(order.Product, out var product))
+                {
+                    ConsolePopup(args.Actor, Loc.GetString("cargo-console-invalid-product"));
+                    PlayDenySound(uid, component);
                     return;
+                }
                 var cost = product.Cost * order.OrderQuantity;
                 if (!_accessReaderSystem.IsAllowed(player, uid) || !_accessReaderSystem.CanSpend(player, uid, null, cost))
                 {
@@ -473,13 +475,9 @@ namespace Content.Server.Cargo.Systems
                     PlayDenySound(uid, component);
                     return;
                 }
-                // Invalid order
-                if (!_protoMan.HasIndex<EntityPrototype>(order.Product))
-                {
-                    ConsolePopup(args.Actor, Loc.GetString("cargo-console-invalid-product"));
-                    PlayDenySound(uid, component);
-                    return;
-                }
+                
+                
+
 
                 var amount = GetOutstandingOrderCount((station.Value, orderDatabase), order.Account);
                 var capacity = orderDatabase.Capacity;

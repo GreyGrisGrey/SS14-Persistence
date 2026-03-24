@@ -1,3 +1,10 @@
+using Content.Server.Administration.Logs;
+using Content.Shared.Administration;
+using Content.Shared.Database;
+using Robust.Shared.Console;
+using Robust.Shared.Timing;
+using System.Threading.Tasks;
+
 namespace Content.Server.Administration.Commands;
 
 #if DEBUG

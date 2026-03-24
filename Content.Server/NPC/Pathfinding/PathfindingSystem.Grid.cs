@@ -9,6 +9,7 @@ using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 using System.Diagnostics.CodeAnalysis;
 using System.Numerics;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Content.Server.NPC.Pathfinding;

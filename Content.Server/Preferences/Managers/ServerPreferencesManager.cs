@@ -79,6 +79,13 @@ namespace Content.Server.Preferences.Managers
 
         internal PlayerPreferences ConvertPreferences(Preference prefs)
         {
+            if (prefs.Profiles.Count < 1)
+            {
+                var constructionFavorites2 = new List<ProtoId<ConstructionPrototype>>(prefs.ConstructionFavorites.Count);
+                foreach (var favorite in prefs.ConstructionFavorites)
+                    constructionFavorites2.Add(new ProtoId<ConstructionPrototype>(favorite));
+                return new PlayerPreferences(new Dictionary<int, HumanoidCharacterProfile>(0), prefs.SelectedCharacterSlot, Color.FromHex(prefs.AdminOOCColor), constructionFavorites2);
+            }
             var maxSlot = prefs.Profiles.Max(p => p.Slot) + 1;
             var profiles = new Dictionary<int, HumanoidCharacterProfile>(maxSlot);
             foreach (var profile in prefs.Profiles)
@@ -480,7 +487,7 @@ namespace Content.Server.Preferences.Managers
                 {
                     PrefsLoaded = true,
                     Prefs = new PlayerPreferences(
-                        new[] { new KeyValuePair<int, HumanoidCharacterProfile>(0, HumanoidCharacterProfile.Random()) },
+                        new[] { new KeyValuePair<int, HumanoidCharacterProfile>() },
                         0, Color.Transparent, [])
                 };
 

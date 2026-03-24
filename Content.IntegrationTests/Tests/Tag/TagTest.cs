@@ -3,6 +3,7 @@ using Content.Shared.Tag;
 using Robust.Shared.GameObjects;
 using Robust.Shared.Map;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Utility;
 using System.Collections.Generic;
 
 namespace Content.IntegrationTests.Tests.Tag

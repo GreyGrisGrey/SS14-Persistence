@@ -152,7 +152,7 @@ namespace Content.Server.Database
                 ConstructionFavorites = [],
             };
 
-            prefs.Profiles.Add(profile);
+            //    prefs.Profiles.Add(profile);
 
             db.DbContext.Preference.Add(prefs);
 

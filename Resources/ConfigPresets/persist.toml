@@ -3,8 +3,6 @@
 # Related docs https://docs.spacestation14.com/en/general-development/tips/config-file-reference.html
 
 [game]
-hostname = "[EN][HRP] Persistence SS14 | Fully persistent game world and characters"
-desc = "Enjoy Space Station 14 where characters and the game world is 100% persistent. Create ships and entire space stations from scratch in an evolving player-driven economy. Write your characters own destiny in the ultimate collaborative storytelling experience of the season."
 soft_max_players = 100
 autosaveenabled = true
 autosaveinterval = 60

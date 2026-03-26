@@ -28,9 +28,8 @@ public sealed partial class JobNetMenu : DefaultWindow
     [Dependency] private readonly IEntityManager _entityManager = default!;
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
     public TimeSpan UntilNextPay = TimeSpan.Zero;
-    public event Action<ButtonEventArgs>? OnJobPressed;
 
-    public JobNetBoundUserInterface? _owner;
+    public JobNetBoundUserInterface? Owner;
 
     public JobNetMenu()
     {
@@ -41,10 +40,10 @@ public sealed partial class JobNetMenu : DefaultWindow
         MasterTabContainer.SetTabTitle(2, "Threshold Codex");
         MasterTabContainer.SetTabTitle(3, "Upgrades");
     }
-     
+
     public void UpdateState(JobNetUpdateState state)
     {
-        if(state.SpendAuth)
+        if (state.SpendAuth)
         {
             SLDetails.Visible = true;
             SpendingLabel.Text = $"${state.Spent}/${state.Spendable}";
@@ -58,14 +57,14 @@ public sealed partial class JobNetMenu : DefaultWindow
         var localPlayer = dependencies.Resolve<IPlayerManager>().LocalEntity;
         PossibleJobs.Clear();
         PossibleJobs.AddItem("Off Duty", 0);
-        if(state.Stations != null)
+        if (state.Stations != null)
         {
             int ind = 1;
             foreach (var kv in state.Stations)
             {
 
                 PossibleJobs.AddItem(kv.Value, kv.Key);
-                if(kv.Key == state.SelectedStation)
+                if (kv.Key == state.SelectedStation)
                     PossibleJobs.Select(ind);
                 ind++;
             }
@@ -88,7 +87,7 @@ public sealed partial class JobNetMenu : DefaultWindow
         {
             WageLabel.Text = "$0";
         }
-        if(state.RemainingMinutes != null)
+        if (state.RemainingMinutes != null)
         {
             UntilNextPay = state.RemainingMinutes.Value;
             TimeLabel.Text = UntilNextPay.ToString("mm\\:ss");
@@ -101,7 +100,7 @@ public sealed partial class JobNetMenu : DefaultWindow
         foreach (var objective in state.CurrentObjectives)
         {
             if (!objective.Visible) continue;
-            WorldObjectiveEntryFragment entry = new(objective.Title,objective.Description,objective.Reward,null,null);
+            WorldObjectiveEntryFragment entry = new(objective.Title, objective.Description, objective.Reward, null, null);
             CurrentObjectives.AddChild(entry);
         }
         CompletedObjectives.RemoveAllChildren();
@@ -115,7 +114,7 @@ public sealed partial class JobNetMenu : DefaultWindow
         CodexContainer.RemoveAllChildren();
 
         var charName = "";
-        if(localPlayer != null)
+        if (localPlayer != null)
             charName = _entityManager.GetComponent<MetaDataComponent>(localPlayer.Value).EntityName;
         int totalNum = 0;
         int lockedNum = 0;
@@ -134,7 +133,7 @@ public sealed partial class JobNetMenu : DefaultWindow
         }
         UnlockedNumberLabel.Text = $"[head=3][color=yellow]{totalNum - lockedNum}/{totalNum}[/color] Codex Entries Unlocked[/head]";
         _prototypeManager.Resolve(state.Level, out var levelProto);
-        if(levelProto != null)
+        if (levelProto != null)
         {
             NetworkLevelPrototype? nextLevelProto = null;
 
@@ -164,9 +163,9 @@ public sealed partial class JobNetMenu : DefaultWindow
 
     private void OnSelectCodex(string title, string description)
     {
-        if (_owner == null || _owner._codexMenu == null) return;
-        _owner._codexMenu.UpdateState(title, description);
-        _owner._codexMenu.OpenCentered();
+        if (Owner == null || Owner.CodexMenu == null) return;
+        Owner.CodexMenu.UpdateState(title, description);
+        Owner.CodexMenu.OpenCentered();
 
     }
     private void UpdateSkipButton(float deltaSeconds)

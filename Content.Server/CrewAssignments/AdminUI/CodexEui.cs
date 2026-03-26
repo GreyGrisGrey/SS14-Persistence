@@ -5,7 +5,6 @@ using Content.Server.EUI;
 using Content.Shared.CrewAssignments.Systems;
 using Content.Shared.Eui;
 using Content.Shared.Follower;
-using Microsoft.CodeAnalysis;
 using Robust.Shared.Player;
 using Robust.Shared.Utility;
 
@@ -13,16 +12,13 @@ namespace Content.Server.CrewAssignments.AdminUI;
 
 public sealed class CodexEui : BaseEui
 {
-    [Dependency] private readonly EntityManager EntityManager = default!;
-    [Dependency] private readonly IEntityManager _entityManager = default!;
-    private readonly FollowerSystem _followerSystem;
+    [Dependency] private readonly EntityManager _entityManager = default!;
     private readonly CrewMetaRecordsSystem _crewMeta;
     private readonly ChatSystem _chat;
     [Dependency] private readonly IChatManager _chatInterface = default!;
     public CodexEui()
     {
         IoCManager.InjectDependencies(this);
-        _followerSystem = IoCManager.Resolve<IEntitySystemManager>().GetEntitySystem<FollowerSystem>();
         _crewMeta = IoCManager.Resolve<IEntitySystemManager>().GetEntitySystem<CrewMetaRecordsSystem>();
         _chat = IoCManager.Resolve<IEntitySystemManager>().GetEntitySystem<ChatSystem>();
     }
@@ -49,10 +45,10 @@ public sealed class CodexEui : BaseEui
                 {
                     foreach (var entry in _crewMeta.MetaRecords.CodexEntries)
                     {
-                        if(entry.ID == createData.ID)
+                        if (entry.ID == createData.ID)
                         {
                             entry.Visible = !entry.Visible;
-                            if(entry.Visible)
+                            if (entry.Visible)
                             {
                                 _chat.DispatchGlobalAnnouncement($"A codex entry has been permanently unlocked for everyone! {entry.Title}", "Threshold Codex");
                             }
@@ -80,11 +76,11 @@ public sealed class CodexEui : BaseEui
                         {
 
                             entry.Whitelist.Add(createData.Name);
-                            var actorQuery = EntityManager.EntityQueryEnumerator<ActorComponent>();
+                            var actorQuery = _entityManager.EntityQueryEnumerator<ActorComponent>();
                             while (actorQuery.MoveNext(out _, out var actorComp))
                             {
                                 MetaDataComponent? metaData = null;
-                                if (!EntityManager.MetaQuery.Resolve(actorComp.Owner, ref metaData, false))
+                                if (!_entityManager.MetaQuery.Resolve(actorComp.Owner, ref metaData, false))
                                     continue;
                                 var name = metaData.EntityName;
                                 if (name == createData.Name && actorComp.PlayerSession != null)

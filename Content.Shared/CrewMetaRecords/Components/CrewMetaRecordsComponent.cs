@@ -2,7 +2,6 @@ using Content.Shared.CrewAssignments.Prototypes;
 using Content.Shared.CrewAssignments.Systems;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Shared.CrewMetaRecords;
 
@@ -59,6 +58,7 @@ public sealed partial class CrewMetaRecordsComponent : Component
 
 [DataDefinition]
 [Serializable]
+[Virtual]
 public partial class CrewMetaRecord
 {
     [DataField("_name")]

@@ -1,5 +1,4 @@
 using Content.Server.Administration;
-using Content.Server.Body.Systems;
 using Content.Server.Cargo.Components;
 using Content.Shared.Administration;
 using Content.Shared.Cargo;
@@ -18,7 +17,6 @@ using Robust.Shared.Containers;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
-using System.Linq;
 
 namespace Content.Server.Cargo.Systems;
 
@@ -116,7 +114,7 @@ public sealed class PricingSystem : EntitySystem
                     continue;
 
                 // TODO check ReagentData for price information?
-                price += (float) quantity * reagentProto.PricePerUnit;
+                price += (float)quantity * reagentProto.PricePerUnit;
             }
         }
 
@@ -135,7 +133,7 @@ public sealed class PricingSystem : EntitySystem
                     continue;
 
                 // TODO check ReagentData for price information?
-                price += (float) quantity * reagentProto.PricePerUnit;
+                price += (float)quantity * reagentProto.PricePerUnit;
             }
         }
 
@@ -271,12 +269,12 @@ public sealed class PricingSystem : EntitySystem
         if (prototype.Components.ContainsKey(Factory.GetComponentName<MaterialComponent>()) &&
             prototype.Components.TryGetValue(Factory.GetComponentName<PhysicalCompositionComponent>(), out var composition))
         {
-            var compositionComp = (PhysicalCompositionComponent) composition.Component;
+            var compositionComp = (PhysicalCompositionComponent)composition.Component;
             var matPrice = GetMaterialPrice(compositionComp);
 
             if (prototype.Components.TryGetValue(Factory.GetComponentName<StackComponent>(), out var stackProto))
             {
-                matPrice *= ((StackComponent) stackProto.Component).Count;
+                matPrice *= ((StackComponent)stackProto.Component).Count;
             }
 
             price += matPrice;
@@ -303,7 +301,7 @@ public sealed class PricingSystem : EntitySystem
 
         if (prototype.Components.TryGetValue(Factory.GetComponentName<SolutionContainerManagerComponent>(), out var solManager))
         {
-            var solComp = (SolutionContainerManagerComponent) solManager.Component;
+            var solComp = (SolutionContainerManagerComponent)solManager.Component;
             price += GetSolutionPrice(solComp);
         }
 
@@ -332,8 +330,8 @@ public sealed class PricingSystem : EntitySystem
             prototype.Components.TryGetValue(Factory.GetComponentName<StackComponent>(), out var stackProto) &&
             !prototype.Components.ContainsKey(Factory.GetComponentName<MaterialComponent>()))
         {
-            var stackPrice = (StackPriceComponent) stackpriceProto.Component;
-            var stack = (StackComponent) stackProto.Component;
+            var stackPrice = (StackPriceComponent)stackpriceProto.Component;
+            var stack = (StackComponent)stackProto.Component;
             price += stack.Count * stackPrice.Price;
         }
 
@@ -358,7 +356,7 @@ public sealed class PricingSystem : EntitySystem
 
         if (prototype.Components.TryGetValue(Factory.GetComponentName<StaticPriceComponent>(), out var staticProto))
         {
-            var staticPrice = (StaticPriceComponent) staticProto.Component;
+            var staticPrice = (StaticPriceComponent)staticProto.Component;
             price += staticPrice.Price;
         }
 

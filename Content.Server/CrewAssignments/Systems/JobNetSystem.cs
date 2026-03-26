@@ -2,32 +2,18 @@ using Content.Server._NF.Bank;
 using Content.Server.Access.Systems;
 using Content.Server.Chat.Managers;
 using Content.Server.CrewManifest;
-using Content.Server.Lathe.Components;
-using Content.Server.Sound;
-using Content.Server.Store.Components;
 using Content.Shared.Cargo;
-using Content.Shared.Cargo.Components;
 using Content.Shared.CrewAssignments;
 using Content.Shared.CrewAssignments.Components;
 using Content.Shared.CrewAssignments.Prototypes;
 using Content.Shared.CrewRecords.Components;
-using Content.Shared.FixedPoint;
 using Content.Shared.Implants.Components;
-using Content.Shared.Interaction;
-using Content.Shared.Lathe;
 using Content.Shared.Popups;
-using Content.Shared.Stacks;
 using Content.Shared.Station.Components;
-using Content.Shared.Store.Components;
-using Content.Shared.Store.Events;
 using Content.Shared.UserInterface;
-using NetCord;
-using Robust.Shared.Audio.Systems;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
-using Robust.Shared.Utility;
-using System.Linq;
 
 namespace Content.Server.CrewAssignments.Systems;
 
@@ -41,7 +27,6 @@ public sealed partial class JobNetSystem : EntitySystem
     [Dependency] private readonly IChatManager _chatManager = default!;
     [Dependency] private readonly IPrototypeManager _proto = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedCargoSystem _cargo = default!;
     [Dependency] private readonly CrewManifestSystem _crewManifest = default!;
     [Dependency] private readonly IdCardSystem _card = default!;
@@ -77,10 +62,10 @@ public sealed partial class JobNetSystem : EntitySystem
         _proto.Resolve(currentProto.Next, out var nextProto);
         if (nextProto == null) return;
         int cost = nextProto.Cost;
-        if(_bank.TryGetBalance(args.Actor, out var balance))
+        if (_bank.TryGetBalance(args.Actor, out var balance))
         {
             if (cost > balance) return;
-            if(_bank.TryBankWithdraw(args.Actor, cost))
+            if (_bank.TryBankWithdraw(args.Actor, cost))
             {
                 record.Level = nextProto.ID;
             }
@@ -92,14 +77,14 @@ public sealed partial class JobNetSystem : EntitySystem
     private void OnSelect(EntityUid uid, JobNetComponent component, JobNetSelectMessage args)
     {
         var station = _station.GetStationByID(args.ID);
-        if(station == null || args.ID == 0)
+        if (station == null || args.ID == 0)
         {
             var currentWorkingFor = component.WorkingFor;
             component.WorkingFor = 0;
             if (currentWorkingFor != 0 && currentWorkingFor != null)
             {
                 var sId = _station.GetStationByID(currentWorkingFor.Value);
-                if(sId != null) _crewManifest.BuildCrewManifest(sId.Value);
+                if (sId != null) _crewManifest.BuildCrewManifest(sId.Value);
             }
             if (component.WorkingFor != 0 && component.WorkingFor != null)
             {
@@ -199,10 +184,10 @@ public sealed partial class JobNetSystem : EntitySystem
         var query = EntityQueryEnumerator<JobNetComponent>();
         while (query.MoveNext(out var uid, out var comp))
         {
-            if(comp.WorkingFor != null && comp.WorkingFor != 0)
+            if (comp.WorkingFor != null && comp.WorkingFor != 0)
             {
                 comp.WorkedTime += TimeSpan.FromSeconds(frameTime);
-                if(comp.WorkedTime > TimeSpan.FromMinutes(20))
+                if (comp.WorkedTime > TimeSpan.FromMinutes(20))
                 {
                     comp.WorkedTime = TimeSpan.Zero;
                     TryPay(comp.Owner, comp);
@@ -222,10 +207,12 @@ public sealed partial class JobNetSystem : EntitySystem
             return;
         }
         EntityUid? player = null;
-        if(TryComp<TransformComponent>(user, out var comp) && comp != null)
+#pragma warning disable RA0030 // Consider using the non-generic variant of this method
+        if (TryComp<TransformComponent>(user, out var comp) && comp != null)
         {
             player = comp.ParentUid;
         }
+#pragma warning restore RA0030 // Consider using the non-generic variant of this method
         if (player == null) return;
         var name = Name(player.Value);
         if (TryComp<CrewRecordsComponent>(station, out var crewRecord) && crewRecord != null)
@@ -238,13 +225,13 @@ public sealed partial class JobNetSystem : EntitySystem
                     {
                         if (crewAssignments.TryGetAssignment(record.AssignmentID, out var assignment) && assignment != null)
                         {
-                            if(assignment.Wage > 0)
+                            if (assignment.Wage > 0)
                             {
-                                if(TryComp<ActorComponent>(player, out var actor) && actor != null && actor.PlayerSession != null)
+                                if (TryComp<ActorComponent>(player, out var actor) && actor != null && actor.PlayerSession != null)
                                 {
                                     var bank = _bank.GetMoneyAccountsComponent();
                                     if (bank == null) return;
-                                    if(_cargo.TryGetAccount(station.Value, "Cargo", out var money))
+                                    if (_cargo.TryGetAccount(station.Value, "Cargo", out var money))
                                     {
                                         if (money < assignment.Wage)
                                         {
@@ -291,7 +278,7 @@ public sealed partial class JobNetSystem : EntitySystem
                                                 );
                                         return;
                                     }
-                                    
+
                                 }
                             }
                         }

@@ -14,6 +14,7 @@ public sealed class CodexEuiState : EuiStateBase
     }
 }
 [DataDefinition, NetSerializable, Serializable]
+[Virtual]
 public partial class CodexEntry
 {
     [DataField("_id")]

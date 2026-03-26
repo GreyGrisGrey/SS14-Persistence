@@ -1,8 +1,8 @@
-using System.Runtime.CompilerServices;
 using Content.Shared.Atmos.Prototypes;
 using Content.Shared.Atmos.Reactions;
 using Content.Shared.CCVar;
 using JetBrains.Annotations;
+using System.Runtime.CompilerServices;
 
 namespace Content.Shared.Atmos.EntitySystems;
 

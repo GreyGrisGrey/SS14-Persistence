@@ -1,5 +1,4 @@
 using Content.Shared.Audio;
-using Content.Shared.Damage;
 using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Systems;
 using Content.Shared.DeviceLinking;
@@ -59,7 +58,7 @@ public abstract class SharedPoweredLightSystem : EntitySystem
 
     private void OnComponentStartup(Entity<PoweredLightComponent> ent, ref ComponentStartup args)
     {
-        if(LifeStage(ent.Owner) == EntityLifeStage.MapInitialized)
+        if (LifeStage(ent.Owner) == EntityLifeStage.MapInitialized)
         {
             UpdateLight(ent.Owner, ent.Comp);
         }

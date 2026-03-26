@@ -23,8 +23,22 @@
                 </BoxContainer>
             </BoxContainer>
             <customControls:HSeparator Margin="5 10 5 10"/>
-            <BoxContainer>
-                <RichTextLabel Name="DescriptionLabel"/>
+            <BoxContainer  HorizontalExpand="True">
+                <RichTextLabel Name="DescriptionLabel" Visible="False"/>
+                <BoxContainer Orientation="Horizontal"  HorizontalExpand="True">
+                    <ProgressBar Name="LevelBar"
+                        HorizontalExpand="True"
+                        Value="0.5"
+                        MaxValue="1"
+                        MinValue="0"
+                        SetHeight="25"
+                        Margin="10 0 10 0"
+                        VerticalAlignment="Center">
+                        <Label Name="LevelBarText"
+                               Margin="4 0"
+                               Text="0/100 Filled" />
+                    </ProgressBar>
+                </BoxContainer>
             </BoxContainer>
         </BoxContainer>
     </PanelContainer>

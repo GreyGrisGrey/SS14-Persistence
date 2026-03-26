@@ -1,12 +1,13 @@
-using System.Numerics;
 using Content.Server.Audio;
 using Content.Server.Power.EntitySystems;
 using Content.Server.Shuttles.Components;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Examine;
 using Content.Shared.Interaction;
+using Content.Shared.Localizations;
 using Content.Shared.Maps;
 using Content.Shared.Physics;
+using Content.Shared.Power;
 using Content.Shared.Shuttles.Components;
 using Content.Shared.Temperature;
 using Robust.Shared.Map.Components;
@@ -16,8 +17,7 @@ using Robust.Shared.Physics.Events;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
-using Content.Shared.Localizations;
-using Content.Shared.Power;
+using System.Numerics;
 
 namespace Content.Server.Shuttles.Systems;
 

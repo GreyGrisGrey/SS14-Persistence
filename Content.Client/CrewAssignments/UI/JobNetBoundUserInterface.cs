@@ -1,14 +1,9 @@
-using Content.Client.Cargo.UI;
 using Content.Client.CrewAssignments.UI;
-using Content.Shared.Cargo.BUI;
-using Content.Shared.Cargo.Events;
 using Content.Shared.CrewAssignments;
 using Content.Shared.Store;
-using Content.Shared.Store.Components;
 using JetBrains.Annotations;
 using Robust.Client.UserInterface;
 using Robust.Shared.Prototypes;
-using System.Linq;
 using static Robust.Client.UserInterface.Controls.BaseButton;
 using static Robust.Client.UserInterface.Controls.OptionButton;
 
@@ -17,19 +12,13 @@ namespace Content.Client.Store.Ui;
 [UsedImplicitly]
 public sealed class JobNetBoundUserInterface : BoundUserInterface
 {
-    private IPrototypeManager _prototypeManager = default!;
 
     [ViewVariables]
     private JobNetMenu? _menu;
 
     [ViewVariables]
-    public CodexEntryMenu? _codexMenu;
+    public CodexEntryMenu? CodexMenu;
 
-    [ViewVariables]
-    private string _search = string.Empty;
-
-    [ViewVariables]
-    private HashSet<ListingDataWithCostModifiers> _listings = new();
 
     public JobNetBoundUserInterface(EntityUid owner, Enum uiKey) : base(owner, uiKey)
     {
@@ -40,10 +29,10 @@ public sealed class JobNetBoundUserInterface : BoundUserInterface
         base.Open();
 
         _menu = this.CreateWindow<JobNetMenu>();
-        _menu._owner = this;
+        _menu.Owner = this;
         _menu.PossibleJobs.OnItemSelected += OnJobPressed;
         _menu.LevelPurchaseButton.OnPressed += OnLevelPurchase;
-        _codexMenu = new();
+        CodexMenu = new();
 
     }
 

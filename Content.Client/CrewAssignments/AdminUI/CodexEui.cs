@@ -49,7 +49,7 @@ public sealed class CodexEui : BaseEui
                 _edit.UpdateState(entry.ID, entry.Title, entry.Description, entry.Whitelist, entry.Visible);
             }
         }
-        
+
     }
 
     public void OnCreate()

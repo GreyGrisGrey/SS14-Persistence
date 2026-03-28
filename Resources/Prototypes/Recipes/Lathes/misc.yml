@@ -257,6 +257,13 @@
     Steel: 500
     Glass: 300
 
+- type: latheRecipe
+  parent: BaseToolRecipe
+  id: BarberScissors
+  result: BarberScissors
+  materials:
+    Steel: 200
+
 # Bibles
 
 - type: latheRecipe

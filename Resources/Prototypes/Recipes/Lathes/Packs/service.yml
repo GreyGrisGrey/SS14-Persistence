@@ -30,6 +30,7 @@
   - BSPAnchorKey
   - KitchenKnife
   - RollingPin
+  - BarberScissors
 
 - type: latheRecipePack
   id: ServiceBoardsStatic

@@ -31,6 +31,9 @@
   id: Bureaucracy
   name: lathe-category-bureaucracy
 
+- type: latheCategory
+  id: Religion
+  name: lathe-category-religion
 # Biogen
 - type: latheCategory
   id: Food

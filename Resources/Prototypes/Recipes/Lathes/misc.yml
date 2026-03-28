@@ -10,6 +10,15 @@
     Steel: 50
     Glass: 200
 
+- type: latheRecipe
+  abstract: true
+  id: BaseBibleRecipe
+  categories:
+  - Religion
+  completetime: 2
+  materials:
+    Paper: 500
+    Plastic: 100
 # Recipes
 
 ## Lights
@@ -247,3 +256,43 @@
   materials:
     Steel: 500
     Glass: 300
+
+# Bibles
+
+- type: latheRecipe
+  parent: BaseBibleRecipe
+  id: Bible
+  result: Bible
+
+- type: latheRecipe
+  parent: BaseBibleRecipe
+  id: BibleDruid
+  result: BibleDruid
+
+- type: latheRecipe
+  parent: BaseBibleRecipe
+  id: BibleCommunistManifesto
+  result: BibleCommunistManifesto
+
+- type: latheRecipe
+  parent: BaseBibleRecipe
+  id: BibleNarsie
+  result: BibleNarsie
+
+- type: latheRecipe
+  parent: BaseBibleRecipe
+  id: BibleNanoTrasen
+  result: BibleNanoTrasen
+
+- type: latheRecipe
+  parent: BaseBibleRecipe
+  id: BibleHonk
+  result: BibleHonk
+
+- type: latheRecipe
+  parent: BaseBibleRecipe
+  id: BibleRatvar
+  result: BibleRatvar
+  materials:
+    Brass: 550
+

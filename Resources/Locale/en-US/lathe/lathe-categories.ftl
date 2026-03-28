@@ -7,6 +7,7 @@ lathe-category-parts = Parts
 lathe-category-tools = Tools
 lathe-category-weapons = Weapons
 lathe-category-bureaucracy = Bureaucracy
+lathe-category-religion = Religion
 
 # Biogen
 lathe-category-food = Food

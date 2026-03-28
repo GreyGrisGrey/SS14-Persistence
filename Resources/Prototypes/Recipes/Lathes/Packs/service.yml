@@ -48,6 +48,18 @@
   - InvoicePrinterCircuitboard
   - IDComputerCircuitboard
 
+- type: latheRecipePack
+  id: ReligionStatic
+  recipes:
+  - Bible
+  - BibleDruid
+  - BibleCommunistManifesto
+  - BibleNarsie
+  - BibleNanoTrasen
+  - BibleHonk
+  - BibleRatvar
+
+
 ## Dynamic
 
 - type: latheRecipePack

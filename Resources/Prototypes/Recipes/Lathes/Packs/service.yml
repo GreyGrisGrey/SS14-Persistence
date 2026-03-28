@@ -28,6 +28,8 @@
   - WetFloorSign
   - WireBrush
   - BSPAnchorKey
+  - KitchenKnife
+  - RollingPin
 
 - type: latheRecipePack
   id: ServiceBoardsStatic

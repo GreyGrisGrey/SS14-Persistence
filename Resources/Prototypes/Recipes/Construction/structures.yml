@@ -1068,7 +1068,6 @@
 
 - type: construction
   id: CourtFenceWood
-  name: Courtroom fence straight
   graph: CourtFenceWood
   startNode: start
   targetNode: straight_court
@@ -1081,7 +1080,6 @@
 
 - type: construction
   id: CourtFenceWoodEnd
-  name: Courtroom fence end
   graph: CourtFenceWood
   startNode: start
   targetNode: end_court
@@ -1094,7 +1092,6 @@
 
 - type: construction
   id: CourtFenceWoodCorner
-  name: Courtroom fence corner
   graph: CourtFenceWood
   startNode: start
   targetNode: corner_court
@@ -1107,7 +1104,6 @@
 
 - type: construction
   id: CourtFenceWoodTJunction
-  name: Courtroom fence TJuntion
   graph: CourtFenceWood
   startNode: start
   targetNode: tjunction_court
@@ -1120,7 +1116,6 @@
 
 - type: construction
   id: CourtFenceWoodGate
-  name: Courtroom fance gate
   graph: CourtFenceWood
   startNode: start
   targetNode: gate_court

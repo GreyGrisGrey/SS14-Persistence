@@ -288,10 +288,6 @@
     damageModifierSet: Electronic
   - type: StaticPrice
     price: 150
-<<<<<<< Updated upstream
-    # Frontier: linkable thrusters, pirate bounties
-=======
->>>>>>> Stashed changes
   - type: DeviceNetwork
     deviceNetId: Wireless
     receiveFrequencyId: BasicDevice

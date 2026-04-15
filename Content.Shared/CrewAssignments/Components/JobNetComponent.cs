@@ -43,5 +43,9 @@ public sealed partial class JobNetComponent : Component
     public int XP = 0;
     [DataField]
     public RogueNetworkType NetworkType = RogueNetworkType.None;
+    [DataField]
+    public string? KillTarget = null;
+    [DataField]
+    public TimeSpan RougeNetResetTime = TimeSpan.Zero;
 }
 

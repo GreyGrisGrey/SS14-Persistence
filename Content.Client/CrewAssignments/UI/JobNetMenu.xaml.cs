@@ -169,7 +169,7 @@ public sealed partial class JobNetMenu : DefaultWindow
         foreach (var objective in state.Objectives)
         {
             _prototypeManager.Resolve(objective, out var proto);
-            if(proto == null) continue;
+            if (proto == null) continue;
             PrecursorObjective precursorObjective = new();
             precursorObjective.ObjectiveLabel.Text = proto.Name;
             precursorObjective.RewardLabel.Text = $"Reward: {proto.Reward} Precursor";
@@ -181,11 +181,11 @@ public sealed partial class JobNetMenu : DefaultWindow
         ObjectiveTimerLabel.Text = UntilNextPrec.ToString("mm\\:ss");
 
         _prototypeManager.Resolve(state.RogueLevel, out var rogueLevel);
-        if(rogueLevel != null)
+        if (rogueLevel != null)
         {
             PLevelText.Text = rogueLevel.Name;
             _prototypeManager.Resolve(rogueLevel.Next, out var nextLevel);
-            if(nextLevel != null)
+            if (nextLevel != null)
             {
                 PLevelBar.MaxValue = nextLevel.Cost;
                 PLevelBarText.Text = $"{state.XP} / {nextLevel.Cost}";
@@ -246,7 +246,6 @@ public sealed partial class JobNetMenu : DefaultWindow
                     break;
 
             }
-            
         }
 
     }
@@ -265,7 +264,7 @@ public sealed partial class JobNetMenu : DefaultWindow
         {
             TimeLabel.Text = UntilNextPay.ToString("mm\\:ss");
         }
-        if(UntilNextPrec.TotalSeconds > 0)
+        if (UntilNextPrec.TotalSeconds > 0)
         {
             UntilNextPrec -= TimeSpan.FromSeconds(deltaSeconds);
             ObjectiveTimerLabel.Text = UntilNextPrec.ToString("mm\\:ss");

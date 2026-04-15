@@ -17,7 +17,6 @@ namespace Content.Shared.CrewAssignments.Systems;
 [Virtual]
 public abstract partial class SharedJobNetSystem : EntitySystem
 {
-    private EntityQuery<StatusEffectComponent> _effectQuery;
     [Dependency] private readonly IPrototypeManager _proto = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
 
@@ -26,7 +25,7 @@ public abstract partial class SharedJobNetSystem : EntitySystem
     }
     public void ReagentObjectiveTryComplete(JobNetComponent component, Entity<StatusEffectComponent?> ent)
     {
-        if (!_effectQuery.Resolve(ent, ref ent.Comp))
+        if (ent.Comp == null)
             return;
         foreach (var objective in component.PrecursorObjectives.ToList())
         {

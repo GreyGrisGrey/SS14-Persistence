@@ -44,11 +44,11 @@ public sealed partial class JobNetSystem : SharedJobNetSystem
             component.PrecursorObjectives.Remove(objective);
             component.Precursor += proto.Reward;
             component.XP += proto.Reward;
-            if(_proto.TryIndex(component.RogueLevel, out var rogueLevel))
+            if (_proto.TryIndex(component.RogueLevel, out var rogueLevel))
             {
-                if(rogueLevel.Next != null && _proto.TryIndex(rogueLevel.Next, out var nextLevel))
+                if (rogueLevel.Next != null && _proto.TryIndex(rogueLevel.Next, out var nextLevel))
                 {
-                    if(component.XP >= nextLevel.Cost)
+                    if (component.XP >= nextLevel.Cost)
                     {
                         component.RogueLevel = nextLevel.ID;
                     }
@@ -56,10 +56,12 @@ public sealed partial class JobNetSystem : SharedJobNetSystem
             }
 
             EntityUid? player = null;
+#pragma warning disable RA0030 // Consider using the non-generic variant of this method
             if (TryComp<TransformComponent>(component.Owner, out var comp) && comp != null)
             {
                 player = comp.ParentUid;
             }
+#pragma warning restore RA0030 // Consider using the non-generic variant of this method
             if (player == null) return;
             _audio.PlayEntity(component.PaySuccessSound, player.Value, player.Value);
             if (TryComp<ActorComponent>(player, out var actor) && actor != null && actor.PlayerSession != null)
@@ -74,7 +76,6 @@ public sealed partial class JobNetSystem : SharedJobNetSystem
                     );
             }
         }
-                
     }
     public override void Initialize()
     {
@@ -267,6 +268,7 @@ public sealed partial class JobNetSystem : SharedJobNetSystem
                 TryAssignPrecursorObjective(uid, comp);
 
             }
+
         }
         base.Update(frameTime);
     }

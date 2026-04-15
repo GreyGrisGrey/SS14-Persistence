@@ -311,7 +311,7 @@ public sealed partial class StatusEffectsSystem : EntitySystem
 
         if (TryComp<ImplantedComponent>(ent.Comp.AppliedTo, out var implanted) && implanted != null)
         {
-            if(implanted.ImplantContainer != null)
+            if (implanted.ImplantContainer != null)
             {
                 foreach (var originalImplant in implanted.ImplantContainer.ContainedEntities)
                 {
@@ -322,10 +322,7 @@ public sealed partial class StatusEffectsSystem : EntitySystem
                     }
                 }
             }
-            
         }
-
-        
         var ev = new StatusEffectEndTimeUpdatedEvent(appliedTo, endTime);
         RaiseLocalEvent(ent, ref ev);
 

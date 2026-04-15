@@ -3,6 +3,7 @@ using Content.Client.Cargo.UI;
 using Content.Client.Message;
 using Content.Client.Store.Ui;
 using Content.Shared.CrewAssignments;
+using Content.Shared.CrewAssignments.Components;
 using Content.Shared.CrewAssignments.Prototypes;
 using Content.Shared.FixedPoint;
 using Content.Shared.Store;
@@ -16,6 +17,7 @@ using Robust.Client.UserInterface.XAML;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 using System.Linq;
+using System.Security.AccessControl;
 using System.Text;
 using static Robust.Client.UserInterface.Controls.BaseButton;
 using static Robust.Client.UserInterface.Controls.MenuBar;
@@ -28,6 +30,7 @@ public sealed partial class JobNetMenu : DefaultWindow
     [Dependency] private readonly IEntityManager _entityManager = default!;
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
     public TimeSpan UntilNextPay = TimeSpan.Zero;
+    public TimeSpan UntilNextPrec = TimeSpan.Zero;
 
     public JobNetBoundUserInterface? Owner;
 
@@ -39,6 +42,7 @@ public sealed partial class JobNetMenu : DefaultWindow
         MasterTabContainer.SetTabTitle(1, "Historic Achievements");
         MasterTabContainer.SetTabTitle(2, "Threshold Codex");
         MasterTabContainer.SetTabTitle(3, "Upgrades");
+        MasterTabContainer.SetTabTitle(4, "Precursor");
     }
 
     public void UpdateState(JobNetUpdateState state)
@@ -159,6 +163,92 @@ public sealed partial class JobNetMenu : DefaultWindow
             }
             NextBenefitsLabel.SetMarkup(nextLevelDesc);
         }
+
+        PrecursorBalanceLabel.Text = state.Precursor.ToString();
+
+        foreach (var objective in state.Objectives)
+        {
+            _prototypeManager.Resolve(objective, out var proto);
+            if(proto == null) continue;
+            PrecursorObjective precursorObjective = new();
+            precursorObjective.ObjectiveLabel.Text = proto.Name;
+            precursorObjective.RewardLabel.Text = $"Reward: {proto.Reward} Precursor";
+            precursorObjective.SectorChaosLabel.Text = $"Will cause minor sector chaos.";
+            PrecursorObjectives.AddChild(precursorObjective);
+
+        }
+        UntilNextPrec = state.PrecursorResetTime;
+        ObjectiveTimerLabel.Text = UntilNextPrec.ToString("mm\\:ss");
+
+        _prototypeManager.Resolve(state.RogueLevel, out var rogueLevel);
+        if(rogueLevel != null)
+        {
+            PLevelText.Text = rogueLevel.Name;
+            _prototypeManager.Resolve(rogueLevel.Next, out var nextLevel);
+            if(nextLevel != null)
+            {
+                PLevelBar.MaxValue = nextLevel.Cost;
+                PLevelBarText.Text = $"{state.XP} / {nextLevel.Cost}";
+                PLevelBar.MinValue = rogueLevel.Cost;
+                PLevelBar.Value = state.XP;
+            }
+            else
+            {
+                PLevelBar.MaxValue = 0;
+                PLevelBarText.Text = $"Maximum Level Attained";
+                PLevelBar.MinValue = rogueLevel.Cost;
+                PLevelBar.Value = state.XP;
+            }
+            if (rogueLevel.ID == "RogueLevel1")
+            {
+                NetworkContentBox.Visible = false;
+                NetworkRequirementLabel.Visible = true;
+            }
+            else
+            {
+                NetworkContentBox.Visible = true;
+                NetworkRequirementLabel.Visible = false;
+            }
+            if (state.NetworkType == RogueNetworkType.None)
+            {
+                NetworkObjectivesRequirement.Visible = true;
+                RogueNetworkObjectivesBox.Visible = false;
+                PurchaseRequirements.Visible = true;
+                PurchasesContent.Visible = false;
+                DealerSelect.Visible = true;
+                BountyHSelect.Visible = true;
+                AssassinSelect.Visible = true;
+            }
+            else
+            {
+                NetworkObjectivesRequirement.Visible = false;
+                RogueNetworkObjectivesBox.Visible = true;
+                PurchaseRequirements.Visible = false;
+                PurchasesContent.Visible = true;
+                DealerSelect.Visible = false;
+                BountyHSelect.Visible = false;
+                AssassinSelect.Visible = false;
+
+            }
+            switch (state.NetworkType)
+            {
+                case RogueNetworkType.None:
+                    RogueNetworkLabel.Text = "None";
+                    break;
+                case RogueNetworkType.BountyHunter:
+                    RogueNetworkLabel.Text = "Bounty Hunter";
+                    break;
+                case RogueNetworkType.Assassin:
+                    RogueNetworkLabel.Text = "Assassin";
+                    break;
+                case RogueNetworkType.Dealer:
+                    RogueNetworkLabel.Text = "Dealer";
+                    break;
+
+            }
+            
+        }
+
     }
 
     private void OnSelectCodex(string title, string description)
@@ -174,7 +264,11 @@ public sealed partial class JobNetMenu : DefaultWindow
         if (UntilNextPay > TimeSpan.Zero)
         {
             TimeLabel.Text = UntilNextPay.ToString("mm\\:ss");
-            return;
+        }
+        if(UntilNextPrec.TotalSeconds > 0)
+        {
+            UntilNextPrec -= TimeSpan.FromSeconds(deltaSeconds);
+            ObjectiveTimerLabel.Text = UntilNextPrec.ToString("mm\\:ss");
         }
     }
 

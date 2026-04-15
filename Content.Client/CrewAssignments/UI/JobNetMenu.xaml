@@ -120,6 +120,159 @@
                 </BoxContainer>
 
             </ScrollContainer>
+
+            <ScrollContainer VerticalExpand="True" HorizontalExpand="True" HScrollEnabled="False">
+                <BoxContainer Orientation="Vertical">
+                    <BoxContainer Orientation="Horizontal">
+                        <Control MinWidth="10"/>
+                        <Label Text="Stored Precursor:"
+                          StyleClasses="LabelKeyText" />
+                        <Label Name="PrecursorBalanceLabel" Text="1000" />
+                        <Control HorizontalExpand="True" />
+                        <Label Text="Secret Phrase:"
+                            StyleClasses="LabelKeyText" />
+                        <Label Name="SecretPhraseLabel" Text="Apple Tractor" />
+                    </BoxContainer>
+                    <BoxContainer Orientation="Horizontal">
+                        <Control MinWidth="10"/>
+                        <Label Text="Rogue Level:"
+                               StyleClasses="LabelKeyText" />
+                        <Label Text="Civillian"
+                               Name="PLevelText" />
+                    </BoxContainer>
+                    <BoxContainer Orientation="Horizontal">
+                        <ProgressBar Name="PLevelBar"
+                            HorizontalExpand="True"
+                            MaxValue="1"
+                            MinValue="0"
+                            SetHeight="25"
+                            Margin="10 0 10 0"
+                            VerticalAlignment="Center">
+                            <Label Name="PLevelBarText"
+                                   Margin="4 0"
+                                   Text="0 %" />
+                        </ProgressBar>
+                    </BoxContainer>
+                    <TabContainer Name="PrecursorTabs"  VerticalExpand="True">
+                        <BoxContainer Orientation="Vertical" Name="Objectives" VerticalExpand="True">
+                            <TabContainer Name="PrecursorObjectivesTabs"  VerticalExpand="True">
+                                <BoxContainer Orientation="Vertical" Name="Basic" VerticalExpand="True">
+                                    <BoxContainer Orientation="Horizontal">
+                                        <Label Text="New Basic Objective:"
+                                            StyleClasses="LabelKeyText" />
+                                        <Label Name="ObjectiveTimerLabel" Text="00:00:30" />
+                                        <Control HorizontalExpand="True" />
+                                    </BoxContainer>
+                                    <BoxContainer Orientation="Vertical" Name="PrecursorObjectives">
+
+                                    </BoxContainer>
+                                </BoxContainer>
+                                <BoxContainer Orientation="Vertical" Name="Network" VerticalExpand="True">
+                                    <BoxContainer Orientation="Horizontal" Name="NetworkObjectivesRequirement">
+                                        <Label Text="Join a Network to see more objectives"
+                                          StyleClasses="LabelKeyText" />
+                                    </BoxContainer>
+                                    <BoxContainer Orientation="Vertical" Name="RogueNetworkObjectivesBox">
+                                        <BoxContainer Orientation="Horizontal">
+                                            <Label Text="New Network Objective:"
+                                              StyleClasses="LabelKeyText" />
+                                            <Label Name="NetworkObjectiveTimerLabel" Text="00:00:30" />
+                                            <Control HorizontalExpand="True" />
+                                        </BoxContainer>
+                                        <BoxContainer Orientation="Vertical" Name="RogueNetworkObjectives">
+                                            <PanelContainer Name="HuntedPanel" StyleClasses="BackgroundPanel" HorizontalExpand="True" MinHeight="30" Margin="10 10 10 0">
+                                                <BoxContainer
+                                                HorizontalExpand="True"
+                                                Orientation="Vertical">
+                                                    <Label Access="Public" Text="Hunted? Enter the Secret Passphrase of those hunting you." />
+                                                    <BoxContainer Orientation="Horizontal">
+                                                        <LineEdit Name="HuntedLE"
+                                                        PlaceHolder="Secret Passphrase"
+                                                        Access="Public"
+                                                        HorizontalExpand="True" />
+                                                        <Button Name="HuntedLEB" Text="Submit" />
+                                                    </BoxContainer>
+                                            
+                                                    <Label Access="Public" Text="Reward: 500 Precursor" />
+                                                </BoxContainer>
+                                            </PanelContainer>
+                                            <PanelContainer Name="HuntPanel" StyleClasses="BackgroundPanel" HorizontalExpand="True" MinHeight="30" Margin="10 10 10 0">
+                                                <BoxContainer
+                                                HorizontalExpand="True"
+                                                Orientation="Vertical">
+                                                    <Label Access="Public" Text="Hunt Faurns Goldberg and enter their Secret Passphrase." />
+                                                    <BoxContainer Orientation="Horizontal">
+                                                        <LineEdit Name="HuntLE"
+                                                        PlaceHolder="Secret Passphrase"
+                                                        Access="Public"
+                                                        HorizontalExpand="True" />
+                                                        <Button Name="HuntLEB" Text="Submit" />
+                                                    </BoxContainer>
+                                                    <Label Access="Public" Text="Reward: 500 Precursor" />
+                                                    <Label Access="Public" Text="Sector chaos will increase" />
+                                                </BoxContainer>
+                                            </PanelContainer>
+                                
+                                        </BoxContainer>
+                                    </BoxContainer>
+                                </BoxContainer>
+                                
+                            </TabContainer>
+                        
+
+                            
+                            
+                        </BoxContainer>
+                        
+                        <BoxContainer Orientation="Vertical" Name="Networks" VerticalExpand="True">
+                            <BoxContainer Orientation="Horizontal" Name="NetworkRequirementLabel">
+                                <Label Text="Reach the rank of Associate to join a Network"
+                                    StyleClasses="LabelKeyText" />
+                            </BoxContainer>
+                            <BoxContainer Orientation="Vertical" Name="NetworkContentBox">
+                                
+                               <BoxContainer Orientation="Horizontal">
+                                    <Control MinWidth="10"/>
+                                    <Label Text="Selected Network:"
+                                      StyleClasses="LabelKeyText" />
+                                    <Label Name="RogueNetworkLabel" Text="None" />
+                                </BoxContainer>
+                                <PanelContainer StyleClasses="BackgroundPanel" HorizontalExpand="True" MinHeight="30" Margin="10 10 10 0">
+                                    <BoxContainer Orientation="Vertical">
+                                        <Label Text="Dealer -- Produce, Sell and Smuggle Drugs" />
+                                        <Button Name="DealerSelect" Text="Select" Access="Public" />
+                                    </BoxContainer>
+                                </PanelContainer>
+                                 <PanelContainer StyleClasses="BackgroundPanel" HorizontalExpand="True" MinHeight="30" Margin="10 10 10 0">
+                                    <BoxContainer Orientation="Vertical">
+                                        <Label Text="Bounty Hunter -- Hunt Dealers and Assassins" />
+                                        <Button Name="BountyHSelect" Text="Select" Access="Public" />
+                                    </BoxContainer>
+                                </PanelContainer>
+                                <PanelContainer StyleClasses="BackgroundPanel" HorizontalExpand="True" MinHeight="30" Margin="10 10 10 0">
+                                    <BoxContainer Orientation="Vertical">
+                                        <Label Text="Assassin -- Hunt Dealers and Bounty Hunters" />
+                                        <Button Name="AssassinSelect" Text="Select" Access="Public" />
+                                    </BoxContainer>
+                                </PanelContainer>
+                            
+                            </BoxContainer>
+                            
+                        </BoxContainer>
+                        
+                        <BoxContainer Orientation="Vertical" Name="Purchases" VerticalExpand="True">
+                            <BoxContainer Orientation="Horizontal" Name="PurchaseRequirements">
+                                <Label Text="Join a Network to see available purchases"
+                                    StyleClasses="LabelKeyText" />
+                            </BoxContainer>
+                            <BoxContainer Orientation="Vertical" Name="PurchasesContent">
+                                
+                            </BoxContainer>
+                        </BoxContainer>
+                    
+                    </TabContainer>
+                </BoxContainer>
+            </ScrollContainer>
         </TabContainer>
     </BoxContainer>
     

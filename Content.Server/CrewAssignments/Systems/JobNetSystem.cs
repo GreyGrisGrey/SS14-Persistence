@@ -6,14 +6,20 @@ using Content.Shared.Cargo;
 using Content.Shared.CrewAssignments;
 using Content.Shared.CrewAssignments.Components;
 using Content.Shared.CrewAssignments.Prototypes;
+using Content.Shared.CrewAssignments.Systems;
 using Content.Shared.CrewRecords.Components;
 using Content.Shared.Implants.Components;
 using Content.Shared.Popups;
+using Content.Shared.Precursor;
 using Content.Shared.Station.Components;
+using Content.Shared.StatusEffectNew.Components;
 using Content.Shared.UserInterface;
+using Robust.Shared.Audio.Systems;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
+using System.Linq;
+using static System.Collections.Specialized.BitVector32;
 
 namespace Content.Server.CrewAssignments.Systems;
 
@@ -21,7 +27,7 @@ namespace Content.Server.CrewAssignments.Systems;
 /// Manages general interactions with a store and different entities,
 /// getting listings for stores, and interfacing with the store UI.
 /// </summary>
-public sealed partial class JobNetSystem : EntitySystem
+public sealed partial class JobNetSystem : SharedJobNetSystem
 {
     [Dependency] private readonly BankSystem _bank = default!;
     [Dependency] private readonly IChatManager _chatManager = default!;
@@ -30,6 +36,46 @@ public sealed partial class JobNetSystem : EntitySystem
     [Dependency] private readonly SharedCargoSystem _cargo = default!;
     [Dependency] private readonly CrewManifestSystem _crewManifest = default!;
     [Dependency] private readonly IdCardSystem _card = default!;
+
+    public override void ReagentObjectiveComplete(JobNetComponent component, ProtoId<PrecursorObjectivePrototype> objective)
+    {
+        if (_proto.TryIndex(objective, out PrecursorObjectivePrototype? proto) && proto != null)
+        {
+            component.PrecursorObjectives.Remove(objective);
+            component.Precursor += proto.Reward;
+            component.XP += proto.Reward;
+            if(_proto.TryIndex(component.RogueLevel, out var rogueLevel))
+            {
+                if(rogueLevel.Next != null && _proto.TryIndex(rogueLevel.Next, out var nextLevel))
+                {
+                    if(component.XP >= nextLevel.Cost)
+                    {
+                        component.RogueLevel = nextLevel.ID;
+                    }
+                }
+            }
+
+            EntityUid? player = null;
+            if (TryComp<TransformComponent>(component.Owner, out var comp) && comp != null)
+            {
+                player = comp.ParentUid;
+            }
+            if (player == null) return;
+            _audio.PlayEntity(component.PaySuccessSound, player.Value, player.Value);
+            if (TryComp<ActorComponent>(player, out var actor) && actor != null && actor.PlayerSession != null)
+            {
+                var msg = $"Precusor Objective Complete! {proto.Reward} precursor gained.";
+                _chatManager.ChatMessageToOne(Shared.Chat.ChatChannel.Notifications,
+                    msg,
+                    msg,
+                    player.Value,
+                    false,
+                    actor.PlayerSession.Channel
+                    );
+            }
+        }
+                
+    }
     public override void Initialize()
     {
         base.Initialize();
@@ -43,9 +89,13 @@ public sealed partial class JobNetSystem : EntitySystem
         SubscribeLocalEvent<JobNetComponent, OpenJobNetImplantEvent>(OnImplantActivate);
         SubscribeLocalEvent<JobNetComponent, JobNetSelectMessage>(OnSelect);
         SubscribeLocalEvent<JobNetComponent, JobNetPurchaseMessage>(OnPurchase);
+        SubscribeLocalEvent<JobNetComponent, JobNetSelectRogueNetMessage>(OnSelectRogueNet);
+
+
 
         InitializeUi();
     }
+
 
     private void OnPurchase(EntityUid uid, JobNetComponent component, JobNetPurchaseMessage args)
     {
@@ -130,6 +180,14 @@ public sealed partial class JobNetSystem : EntitySystem
 
     }
 
+    private void OnSelectRogueNet(EntityUid uid, JobNetComponent component, JobNetSelectRogueNetMessage args)
+    {
+        if (component.NetworkType != RogueNetworkType.None) return;
+        if (component.RogueLevel == "RogueLevel1") return;
+        component.NetworkType = args.Net;
+        UpdateUserInterface(args.Actor, uid, component);
+    }
+
     private void OnJobNetOpenAttempt(EntityUid uid, JobNetComponent component, ActivatableUIOpenAttemptEvent args)
     {
         if (!_mind.TryGetMind(args.User, out var mind, out _))
@@ -179,6 +237,14 @@ public sealed partial class JobNetSystem : EntitySystem
     {
         ToggleUi(args.Performer, uid, component);
     }
+
+    public void TryAssignPrecursorObjective(EntityUid user, JobNetComponent component)
+    {
+        component.PrecursorObjectives.Clear();
+        var precursorObjectives = _proto.EnumeratePrototypes<PrecursorObjectivePrototype>();
+        var form = precursorObjectives.ToList().Shuffle();
+        component.PrecursorObjectives.AddRange(form.First().ID);
+    }
     public override void Update(float frameTime)
     {
         var query = EntityQueryEnumerator<JobNetComponent>();
@@ -192,6 +258,14 @@ public sealed partial class JobNetSystem : EntitySystem
                     comp.WorkedTime = TimeSpan.Zero;
                     TryPay(comp.Owner, comp);
                 }
+            }
+
+            comp.PrecursorResetTime -= TimeSpan.FromSeconds(frameTime);
+            if (comp.PrecursorResetTime <= TimeSpan.Zero)
+            {
+                comp.PrecursorResetTime = TimeSpan.FromMinutes(30);
+                TryAssignPrecursorObjective(uid, comp);
+
             }
         }
         base.Update(frameTime);

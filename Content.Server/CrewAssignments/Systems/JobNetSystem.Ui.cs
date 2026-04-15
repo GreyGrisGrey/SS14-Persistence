@@ -189,7 +189,7 @@ public sealed partial class JobNetSystem
         }
         var balance = 0;
         _bank.TryGetBalance(user.Value, out balance);
-        var state = new JobNetUpdateState(possibleStations, assignmentName, wage, selectedstation, remainingTime, currentObjectives, completedObjectives, codexEntries, currentLevel, balance, spendAuth, spent, spendable);
+        var state = new JobNetUpdateState(possibleStations, assignmentName, wage, selectedstation, remainingTime, currentObjectives, completedObjectives, codexEntries, currentLevel, balance, spendAuth, spent, spendable, component.Precursor, component.PrecursorObjectives, component.PrecursorResetTime, component.RogueLevel, component.XP, component.NetworkType);
         _ui.SetUiState(jobnet, JobNetUiKey.Key, state);
     }
 

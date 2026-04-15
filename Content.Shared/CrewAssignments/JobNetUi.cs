@@ -1,5 +1,7 @@
+using Content.Shared.CrewAssignments.Components;
 using Content.Shared.CrewAssignments.Prototypes;
 using Content.Shared.CrewAssignments.Systems;
+using Content.Shared.Precursor;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
 
@@ -27,8 +29,13 @@ public sealed class JobNetUpdateState : BoundUserInterfaceState
     public bool SpendAuth;
     public int Spent;
     public int Spendable;
-
-    public JobNetUpdateState(Dictionary<int, string>? stations, string? assignmentName, int? wage, int selectedStation, TimeSpan? remainingMinutes, List<WorldObjectivesEntry> currentObjectives, List<WorldObjectivesEntry> completedObjectives, List<CodexEntry> codexEntries, ProtoId<NetworkLevelPrototype> level, int balance, bool spendAuth, int spent, int spendable)
+    public int Precursor;
+    public List<ProtoId<PrecursorObjectivePrototype>> Objectives;
+    public TimeSpan PrecursorResetTime;
+    public ProtoId<RogueLevelPrototype> RogueLevel;
+    public int XP;
+    public RogueNetworkType NetworkType;
+    public JobNetUpdateState(Dictionary<int, string>? stations, string? assignmentName, int? wage, int selectedStation, TimeSpan? remainingMinutes, List<WorldObjectivesEntry> currentObjectives, List<WorldObjectivesEntry> completedObjectives, List<CodexEntry> codexEntries, ProtoId<NetworkLevelPrototype> level, int balance, bool spendAuth, int spent, int spendable, int precursor, List<ProtoId<PrecursorObjectivePrototype>> objectives, TimeSpan precursorResetTime, ProtoId<RogueLevelPrototype> rogueLevel, int xP, RogueNetworkType networkType)
     {
         Stations = stations;
         AssignmentName = assignmentName;
@@ -43,6 +50,12 @@ public sealed class JobNetUpdateState : BoundUserInterfaceState
         SpendAuth = spendAuth;
         Spent = spent;
         Spendable = spendable;
+        Precursor = precursor;
+        Objectives = objectives;
+        PrecursorResetTime = precursorResetTime;
+        RogueLevel = rogueLevel;
+        XP = xP;
+        NetworkType = networkType;
     }
 }
 
@@ -68,5 +81,16 @@ public sealed class JobNetPurchaseMessage : BoundUserInterfaceMessage
 {
     public JobNetPurchaseMessage()
     {
+    }
+}
+
+
+[Serializable, NetSerializable]
+public sealed class JobNetSelectRogueNetMessage : BoundUserInterfaceMessage
+{
+    public RogueNetworkType Net;
+    public JobNetSelectRogueNetMessage(RogueNetworkType net)
+    {
+        Net = net;
     }
 }

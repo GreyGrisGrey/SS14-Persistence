@@ -1,0 +1,69 @@
+using Content.Shared.CrewAssignments.Components;
+using Content.Shared.Precursor;
+using Content.Shared.StatusEffectNew.Components;
+using Robust.Shared.Audio.Systems;
+using Robust.Shared.Prototypes;
+using Robust.Shared.Timing;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Linq;
+using System.Security.AccessControl;
+using System.Text;
+using static Robust.Shared.Physics.DynamicTree;
+
+namespace Content.Shared.CrewAssignments.Systems;
+
+[Virtual]
+public abstract partial class SharedJobNetSystem : EntitySystem
+{
+    private EntityQuery<StatusEffectComponent> _effectQuery;
+    [Dependency] private readonly IPrototypeManager _proto = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
+
+    public virtual void ReagentObjectiveComplete(JobNetComponent component, ProtoId<PrecursorObjectivePrototype> objective)
+    {
+    }
+    public void ReagentObjectiveTryComplete(JobNetComponent component, Entity<StatusEffectComponent?> ent)
+    {
+        if (!_effectQuery.Resolve(ent, ref ent.Comp))
+            return;
+        foreach (var objective in component.PrecursorObjectives.ToList())
+        {
+            if (_proto.TryIndex(objective, out PrecursorObjectivePrototype? proto) && proto != null)
+            {
+                if (proto.TargetStatus == StatusEffectType.Drunk)
+                {
+                    if (Name(ent.Owner) == "drunk")
+                    {
+                        if (ent.Comp.EndEffectTime != null && (ent.Comp.EndEffectTime.Value - _timing.CurTime).TotalSeconds >= proto.RequiredAmount)
+                        {
+                            ReagentObjectiveComplete(component, objective);
+                        }
+                    }
+                }
+                if (proto.TargetStatus == StatusEffectType.Hallucinate)
+                {
+                    if (Name(ent.Owner) == "hallucinations")
+                    {
+                        if (ent.Comp.EndEffectTime != null && (ent.Comp.EndEffectTime.Value - _timing.CurTime).TotalSeconds >= proto.RequiredAmount)
+                        {
+                            ReagentObjectiveComplete(component, objective);
+                        }
+                    }
+                }
+                if (proto.TargetStatus == StatusEffectType.Jitter)
+                {
+                    if (Name(ent.Owner) == "reagent speed")
+                    {
+                        if (ent.Comp.EndEffectTime != null && (ent.Comp.EndEffectTime.Value - _timing.CurTime).TotalSeconds >= proto.RequiredAmount)
+                        {
+                            ReagentObjectiveComplete(component, objective);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+}

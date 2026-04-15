@@ -1,5 +1,6 @@
 using Content.Client.CrewAssignments.UI;
 using Content.Shared.CrewAssignments;
+using Content.Shared.CrewAssignments.Components;
 using Content.Shared.Store;
 using JetBrains.Annotations;
 using Robust.Client.UserInterface;
@@ -32,8 +33,26 @@ public sealed class JobNetBoundUserInterface : BoundUserInterface
         _menu.Owner = this;
         _menu.PossibleJobs.OnItemSelected += OnJobPressed;
         _menu.LevelPurchaseButton.OnPressed += OnLevelPurchase;
+        _menu.DealerSelect.OnPressed += DealerSelect_OnPressed;
+        _menu.AssassinSelect.OnPressed += AssassinSelect_OnPressed;
+        _menu.BountyHSelect.OnPressed += BountyHSelect_OnPressed;
         CodexMenu = new();
 
+    }
+
+    private void BountyHSelect_OnPressed(ButtonEventArgs obj)
+    {
+        SendMessage(new JobNetSelectRogueNetMessage(RogueNetworkType.BountyHunter));
+    }
+
+    private void AssassinSelect_OnPressed(ButtonEventArgs obj)
+    {
+        SendMessage(new JobNetSelectRogueNetMessage(RogueNetworkType.Assassin));
+    }
+
+    private void DealerSelect_OnPressed(ButtonEventArgs obj)
+    {
+        SendMessage(new JobNetSelectRogueNetMessage(RogueNetworkType.Dealer));
     }
 
     public void OnLevelPurchase(ButtonEventArgs args)

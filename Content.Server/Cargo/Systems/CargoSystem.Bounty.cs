@@ -286,7 +286,20 @@ public sealed partial class CargoSystem
             // determine valid bounty items and pay based on them
             var bountyEnts = GetValidBountyEntities(container.Owner, bountyPrototype.Entries);
             bountyEnts.Remove(container.Owner);
-            var toSell = Math.Min(max, bountyEnts.Count);
+            int totalSold = 0;
+            foreach (var ent in bountyEnts)
+            {
+                if(TryComp<StackComponent>(ent, out var stack))
+                {
+                    totalSold += stack.Count;
+                }
+                else
+                {
+                    totalSold++;
+                }
+            }
+            var toSell = Math.Min(max, totalSold);
+
             args.Price = toSell * bountyPrototype.Reward - _pricing.GetPrice(container.Owner);
         }
         else if (bountyPrototype.BountyType == BountyType.PayPerReagent)
@@ -371,7 +384,19 @@ public sealed partial class CargoSystem
                 var max = bountyProto.Entries.FirstOrDefault().Amount - bounty.AmountCompleted;
                 var bountyEnts = GetValidBountyEntities(sold, bountyProto.Entries);
                 bountyEnts.Remove(sold);
-                var toSell = Math.Min(max, bountyEnts.Count);
+                int totalSold = 0;
+                foreach (var ent in bountyEnts)
+                {
+                    if (TryComp<StackComponent>(ent, out var stack))
+                    {
+                        totalSold += stack.Count;
+                    }
+                    else
+                    {
+                        totalSold++;
+                    }
+                }
+                var toSell = Math.Min(max, totalSold);
                 if (toSell >= max)
                 {
                     CompleteBounty(station, bounty, args.Station);

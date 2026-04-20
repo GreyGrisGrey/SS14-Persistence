@@ -269,7 +269,7 @@
       tags:
         - Sheet
     materialWhiteList:
-    - Plasma
+    - Phoron
   - type: OreSiloClient
   - type: Fixtures
     fixtures:

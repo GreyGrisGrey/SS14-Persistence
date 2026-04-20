@@ -260,6 +260,7 @@
   - type: Physics
     bodyType: Static
   - type: AnomalyGenerator
+    requiredMaterial: Phoron
     generatingSound:
       path: /Audio/Machines/anomaly_generate.ogg
     generatingFinishedSound:

@@ -36,7 +36,7 @@
   - !type:PlantAdjustToxins
     amount: 40
   metabolisms:
-    Poison:
+    Bloodstream:
       effects:
       - !type:HealthChange
         damage:
@@ -46,7 +46,7 @@
         alertType: Toxins
         minScale: 2.0
         time: 10
-    Gas:
+    Respiration:
       effects:
       - !type:HealthChange
         ignoreResistances: true
@@ -471,7 +471,7 @@
   meltingPoint: 351
   boilingPoint: 554
   metabolisms:
-    Poison:
+    Bloodstream:
       metabolismRate: 0.05
       effects:
       - !type:HealthChange

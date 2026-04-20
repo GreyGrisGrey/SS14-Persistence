@@ -412,7 +412,7 @@
       - !type:Flammable
         multiplier: 0.9
   metabolisms:
-    Gas:
+    Respiration:
       effects:
       - !type:HealthChange
         damage:

@@ -95,8 +95,8 @@ public sealed class RadioSystem : EntitySystem
     public void SendRadioMessage(EntityUid messageSource, string message, RadioChannelPrototype channel, EntityUid radioSource, bool escapeMarkup = true, bool useNetworkOverride = true)
     {
         // TODO if radios ever garble / modify messages, feedback-prevention needs to be handled better than this.
-    //    if (!_messages.Add(message))
-    //        return;
+        if (!_messages.Add(message))
+            return;
 
         var debugWatch = Stopwatch.StartNew();
 

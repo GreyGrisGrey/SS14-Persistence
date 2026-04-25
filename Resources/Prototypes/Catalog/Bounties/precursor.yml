@@ -1,6 +1,6 @@
 - type: cargoBounty
   id: BountyPrecursorSpaceDrugs
-  reward: 2
+  reward: 20
   reagentId: SpaceDrugs
   group: PrecursorBounty
   bountyType: PayPerReagent
@@ -12,7 +12,7 @@
 
 - type: cargoBounty
   id: BountyPrecursorHyperzine
-  reward: 3
+  reward: 30
   reagentId: Stimulants
   group: PrecursorBounty
   bountyType: PayPerReagent

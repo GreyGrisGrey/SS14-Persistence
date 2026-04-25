@@ -5,12 +5,13 @@
   name: Simple Trading Outpost (1)
   markets:
     - market
+    - engineermarket
   groups:
     StationBounty : 2
+    MaterialBounty : 2
     ServiceBounty : 2
     GasBounty : 1
     ReagentBounty : 1
-    EngineeringBounty : 1
   income: -5000
 
 - type: infrastructureLevel
@@ -21,12 +22,14 @@
   markets:
     - market
     - market2
+    - engineermarket
+    - engineermarket2
   groups:
     StationBounty : 3
+    MaterialBounty : 3
     ServiceBounty : 3
     GasBounty : 2
     ReagentBounty : 2
-    EngineeringBounty : 2
   income: 0
   level: 2
 - type: infrastructureLevel
@@ -38,13 +41,16 @@
     - market
     - market2
     - market3
+    - engineermarket
+    - engineermarket2
+    - engineermarket3
   groups:
     StationBounty : 4
+    MaterialBounty : 4
     ServiceBounty : 4
-    HunterBounty : 1
     GasBounty : 3
     ReagentBounty : 3
-    EngineeringBounty : 2
+    HunterBounty : 1
   income: 10000
   level: 3
 
@@ -58,13 +64,17 @@
     - market2
     - market3
     - market4
+    - engineermarket
+    - engineermarket2
+    - engineermarket3
+    - engineermarket4
   groups:
-    StationBounty : 6
-    ServiceBounty : 6
-    HunterBounty : 2
+    StationBounty : 5
+    MaterialBounty : 5
+    ServiceBounty : 5
     GasBounty : 4
     ReagentBounty : 4
-    EngineeringBounty : 3
+    HunterBounty : 2
   income: 30000
   level: 4
 
@@ -75,11 +85,12 @@
   name: Simple Research Outpost (1)
   markets:
     - sciencemarket
+    - explorermarket
   groups:
     ScienceBounty : 2
-    StationBounty : 2
+    MaterialBounty : 2
     ReagentBounty : 1
-  income: -5000
+  income: 0
 
 - type: infrastructureLevel
   id: ILevelScience2
@@ -89,10 +100,12 @@
   markets:
     - sciencemarket
     - sciencemarket2
+    - explorermarket
+    - explorermarket2
   groups:
     ScienceBounty : 3
-    StationBounty : 2
-    ReagentBounty : 2
+    MaterialBounty : 2
+    ReagentBounty : 1
     GasBounty : 1
     ExplorationBounty : 1
   income: 0
@@ -107,12 +120,15 @@
     - sciencemarket
     - sciencemarket2
     - sciencemarket3
+    - explorermarket
+    - explorermarket2
+    - explorermarket3
   groups:
     ScienceBounty : 4
-    StationBounty : 3
-    ReagentBounty : 3
+    MaterialBounty : 2
+    ReagentBounty : 2
     GasBounty : 2
-    ExplorationBounty : 1
+    ExplorationBounty : 2
   income: 10000
   level: 3
 
@@ -126,12 +142,16 @@
     - sciencemarket2
     - sciencemarket3
     - sciencemarket4
+    - explorermarket
+    - explorermarket2
+    - explorermarket3
+    - explorermarket4
   groups:
-    ScienceBounty : 6
-    StationBounty : 4
-    ReagentBounty : 6
+    ScienceBounty : 5
+    MaterialBounty : 3
+    ReagentBounty : 3
     GasBounty : 3
-    ExplorationBounty : 2
+    ExplorationBounty : 3
   income: 30000
   level: 4
 
@@ -204,7 +224,6 @@
   markets:
     - engineermarket
   groups:
-    EngineeringBounty : 4
     ExplorationBounty : 1
     StationBounty : 1
   income: -5000
@@ -218,7 +237,6 @@
     - engineermarket
     - engineermarket2
   groups:
-    EngineeringBounty : 6
     ExplorationBounty : 1
     StationBounty : 2
   income: 0
@@ -234,7 +252,6 @@
     - engineermarket2
     - engineermarket3
   groups:
-    EngineeringBounty : 8
     ExplorationBounty : 2
     StationBounty : 2
   income: 10000
@@ -251,7 +268,6 @@
     - engineermarket3
     - engineermarket4
   groups:
-    EngineeringBounty : 9
     ExplorationBounty : 3
     StationBounty : 3
   income: 30000

@@ -8,7 +8,9 @@ using Content.Shared.Cargo;
 using Content.Shared.Cargo.Components;
 using Content.Shared.Cargo.Prototypes;
 using Content.Shared.Chemistry.EntitySystems;
+using Content.Shared.Chemistry.Reagent;
 using Content.Shared.Database;
+using Content.Shared.FixedPoint;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Labels.EntitySystems;
 using Content.Shared.NameIdentifier;
@@ -25,6 +27,7 @@ using Robust.Shared.Utility;
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using System.Xml.Linq;
 
 namespace Content.Server.Cargo.Systems;
 
@@ -163,8 +166,9 @@ public sealed partial class CargoSystem
                         }
 
                     }
+                    List<CargoBountyHistoryData> fakeHistory = new()
 
-                    _uiSystem.SetUiState(uid, CargoConsoleUiKey.Bounty, new CargoBountyConsoleState(sortedBounties, bountyDb.History, untilNextSkip2, possibleTrades, component.SelectedTradeGrid, tax, exp, dexp, rexp, iLevelTitle, owner));
+                    _uiSystem.SetUiState(uid, CargoConsoleUiKey.Bounty, new CargoBountyConsoleState(sortedBounties, fakeHistory;, untilNextSkip2, possibleTrades, component.SelectedTradeGrid, tax, exp, dexp, rexp, iLevelTitle, owner));
                     return;
                 }
             }
@@ -337,7 +341,8 @@ public sealed partial class CargoSystem
             args.Handled = true;
             database.CheckedBounties.Add(component.Id);
             // determine valid bounty items and pay based on them
-            var amount = _sharedSolutionContainer.GetTotalPrototypeQuantity(container.Owner, bountyPrototype.ReagentId);
+            var amount = _sharedSolutionContainer.GetTotalPrototypeQuantity(container.Owner, bountyPrototype.ReagentId.Value);
+            amount += GetContainerAmount(container.Owner, bountyPrototype.ReagentId.Value);
             var finalAmount = ((float)amount);
             var toSell = Math.Min(max, finalAmount);
             args.Price = toSell * bountyPrototype.Reward - _pricing.GetPrice(container.Owner);
@@ -355,6 +360,22 @@ public sealed partial class CargoSystem
         }
     }
 
+    public FixedPoint2 GetContainerAmount(EntityUid uid, ProtoId<ReagentPrototype> chem)
+    {
+        FixedPoint2 total = 0;
+
+        if (!TryComp<ContainerManagerComponent>(uid, out var containers))
+            return total;
+
+        foreach (var container in containers.Containers.Values)
+        {
+            foreach (var ent in container.ContainedEntities)
+            {
+                total += _sharedSolutionContainer.GetTotalPrototypeQuantity(ent, chem);
+            }
+        }
+        return total;
+    }
     public void CompleteBounty(EntityUid station, CargoBountyData bounty, EntityUid? actor, string? dealerName)
     {
         if (dealerName != null)
@@ -461,6 +482,7 @@ public sealed partial class CargoSystem
                 var max = bountyProto.Entries.FirstOrDefault().Amount - bounty.AmountCompleted;
                 // determine valid bounty items and pay based on them
                 var amount = _sharedSolutionContainer.GetTotalPrototypeQuantity(sold, bountyProto.ReagentId);
+                amount += GetContainerAmount(sold, bountyProto.ReagentId.Value);
                 var finalAmount = ((float)amount);
                 var toSell = Math.Min(max, finalAmount);
                 if (toSell >= max)

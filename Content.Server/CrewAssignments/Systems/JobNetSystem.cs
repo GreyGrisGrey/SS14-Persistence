@@ -71,17 +71,6 @@ public sealed partial class JobNetSystem : SharedJobNetSystem
         {
             component.PrecursorObjectives.Remove(objective);
             AwardPrecursor(component.Owner, component, proto.Reward);
-            if (_proto.TryIndex(component.RogueLevel, out var rogueLevel))
-            {
-                if (rogueLevel.Next != null && _proto.TryIndex(rogueLevel.Next, out var nextLevel))
-                {
-                    if (component.XP >= nextLevel.Cost)
-                    {
-                        component.RogueLevel = nextLevel.ID;
-                    }
-                }
-            }
-
             EntityUid? player = null;
             var comp = Transform(component.Owner);
             player = comp.ParentUid;
@@ -240,6 +229,16 @@ public sealed partial class JobNetSystem : SharedJobNetSystem
                 false,
                 actor.PlayerSession.Channel
                 );
+        }
+        if (_proto.TryIndex(component.RogueLevel, out var rogueLevel))
+        {
+            if (rogueLevel.Next != null && _proto.TryIndex(rogueLevel.Next, out var nextLevel))
+            {
+                if (component.XP >= nextLevel.Cost)
+                {
+                    component.RogueLevel = nextLevel.ID;
+                }
+            }
         }
     }
     private void OnSubmitHunted(Entity<JobNetComponent> ent, ref JobNetSubmitHuntedMessage args)

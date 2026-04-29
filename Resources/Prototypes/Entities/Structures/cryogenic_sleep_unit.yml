@@ -112,4 +112,9 @@
   - type: EmptyOnMachineDeconstruct
     containers:
      - storage
-
+  - type: Sprite
+    noRot: true
+    sprite: _Persistence14/Structures/cryostorage.rsi
+    layers:
+    - state: sleeper_0
+      map: ["base"]

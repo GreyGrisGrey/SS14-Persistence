@@ -82,23 +82,25 @@
                         <Label Text="ZENITH SECTOR" Margin="0 0 10 0"
                            StyleClasses="LabelKeyText" />
                     </BoxContainer>
+                    <Control MinHeight="40" />
                     <BoxContainer Orientation="Horizontal">
                         <Label Text="Sector Development:" Margin="0 0 10 0"
                            StyleClasses="LabelKeyText" />
                         <Label Name="SectorDevelopmentLabel" Text="10" Margin="0 0 10 0" />
                     </BoxContainer>
+                    <Control MinHeight="20" />
                     <BoxContainer Orientation="Horizontal">
                         <Label Text="Sector Chaos:" Margin="0 0 10 0"
                            StyleClasses="LabelKeyText" />
                         <Label Name="SectorChaosLabel" Text="100/1500" Margin="0 0 10 0" />
                     </BoxContainer>
+                    <Control MinHeight="20" />
                     <BoxContainer Orientation="Horizontal">
                         <Label Text="Sector Status:" Margin="0 0 10 0"
                            StyleClasses="LabelKeyText" />
                     </BoxContainer>
-                    <PanelContainer StyleClasses="BackgroundPanel" HorizontalExpand="True" MinHeight="30" Margin="10 10 10 0">
-                        <BoxContainer Orientation="Vertical">
-                        </BoxContainer>
+                    <PanelContainer StyleClasses="BackgroundPanel" HorizontalExpand="True" MinHeight="120" Margin="10 10 10 0">
+                        <RichTextLabel Name="SectorStatusLabel" />
                     </PanelContainer>
                 </BoxContainer>
 
@@ -172,6 +174,8 @@
                                StyleClasses="LabelKeyText" />
                         <Label Text="Civillian"
                                Name="PLevelText" />
+                        <Control HorizontalExpand="True" />
+                        <Button Name="PrecursorGuidebook" Text="Guide" Access="Public" />
                     </BoxContainer>
                     <BoxContainer Orientation="Horizontal">
                         <ProgressBar Name="PLevelBar"
@@ -223,7 +227,7 @@
                                                         PlaceHolder="Secret Passphrase"
                                                         Access="Public"
                                                         HorizontalExpand="True" />
-                                                        <Button Name="HuntedLEB" Text="Submit" />
+                                                        <Button Access="Public" Name="HuntedLEB" Text="Submit" />
                                                     </BoxContainer>
                                             
                                                     <Label Access="Public" Text="Reward: 500 Precursor" />
@@ -233,19 +237,21 @@
                                                 <BoxContainer
                                                 HorizontalExpand="True"
                                                 Orientation="Vertical">
-                                                    <Label Access="Public" Text="Hunt Faurns Goldberg and enter their Secret Passphrase." />
+                                                    <Label Name="HuntDescLabel" Access="Public" Text="Hunt Faurns Goldberg and enter their Secret Passphrase." />
                                                     <BoxContainer Orientation="Horizontal">
                                                         <LineEdit Name="HuntLE"
                                                         PlaceHolder="Secret Passphrase"
                                                         Access="Public"
                                                         HorizontalExpand="True" />
-                                                        <Button Name="HuntLEB" Text="Submit" />
+                                                        <Button Access="Public" Name="HuntLEB" Text="Submit" />
                                                     </BoxContainer>
                                                     <Label Access="Public" Text="Reward: 500 Precursor" />
                                                     <Label Access="Public" Text="Sector chaos will increase" />
                                                 </BoxContainer>
                                             </PanelContainer>
-                                
+                                            <BoxContainer Name="DealerObjectives" Orientation="Vertical">
+                                                
+                                            </BoxContainer>
                                         </BoxContainer>
                                     </BoxContainer>
                                 </BoxContainer>
@@ -299,7 +305,26 @@
                                     StyleClasses="LabelKeyText" />
                             </BoxContainer>
                             <BoxContainer Orientation="Vertical" Name="PurchasesContent">
-                                
+                                <Label Text="Rank 2:"
+                                    StyleClasses="LabelKeyText" />
+                                <BoxContainer Orientation="Vertical" Name="Rank2Content">
+                                    
+                                </BoxContainer>
+                                <Label Text="Rank 3:"
+                                    StyleClasses="LabelKeyText" />
+                                <BoxContainer Orientation="Vertical" Name="Rank3Content">
+
+                                </BoxContainer>
+                                <Label Text="Rank 4:"
+                                    StyleClasses="LabelKeyText" />
+                                <BoxContainer Orientation="Vertical" Name="Rank4Content">
+
+                                </BoxContainer>
+                                <Label Text="Rank 5:"
+                                    StyleClasses="LabelKeyText" />
+                                <BoxContainer Orientation="Vertical" Name="Rank5Content">
+
+                                </BoxContainer>
                             </BoxContainer>
                         </BoxContainer>
                     

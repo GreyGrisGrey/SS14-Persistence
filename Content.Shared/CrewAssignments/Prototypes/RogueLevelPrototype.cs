@@ -27,9 +27,16 @@ public sealed partial class RogueLevelPrototype : IPrototype
     public int Cost = 0;
 
     /// <summary>
-    /// What RogueLevel is the next available to purchase
+    /// What RogueLevel is the next to level into
     /// </summary>
     [DataField]
     public ProtoId<RogueLevelPrototype>? Next = null;
+
+    /// <summary>
+    /// What level of items are available for purchase
+    /// </summary>
+    [DataField]
+    public int ItemLevel = 0;
+
 
 }

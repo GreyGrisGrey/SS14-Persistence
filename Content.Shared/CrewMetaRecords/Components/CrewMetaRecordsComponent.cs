@@ -9,7 +9,10 @@ namespace Content.Shared.CrewMetaRecords;
 [AutoGenerateComponentState]
 public sealed partial class CrewMetaRecordsComponent : Component
 {
-
+    [DataField]
+    public string SectorStatus = "";
+    [DataField]
+    public int SectorChaos = 0;
     [DataField]
     public int NextObjectiveID = 1;
     [DataField]

@@ -1,9 +1,11 @@
+using Content.Shared.Cargo;
 using Content.Shared.CrewAssignments.Prototypes;
 using Content.Shared.Precursor;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
+using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Shared.CrewAssignments.Components;
 
@@ -46,6 +48,14 @@ public sealed partial class JobNetComponent : Component
     [DataField]
     public string? KillTarget = null;
     [DataField]
-    public TimeSpan RougeNetResetTime = TimeSpan.Zero;
+    public TimeSpan RogueNetResetTime = TimeSpan.Zero;
+
+    [DataField]
+    public string SecretPhrase = "";
+    [DataField]
+    public CargoBountyData? DealerBounty = null;
+
+    [DataField("nextPrintTime", customTypeSerializer: typeof(TimeOffsetSerializer))]
+    public TimeSpan NextPrintTime = TimeSpan.Zero;
 }
 

@@ -2,6 +2,7 @@
   id: precursorDrunk
   name: Get Very Drunk
   targetStatus: Drunk
+  requiredAmount: 15
 
 - type: precursorObjective
   id: precursorHallucinate

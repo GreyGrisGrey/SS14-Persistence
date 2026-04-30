@@ -70,3 +70,33 @@
   id: AccessControl
   name: Access Control
   text: "/ServerInfo/Guidebook/Persistence/AccessControl.xml"
+
+- type: guideEntry
+  id: Precursor
+  name: Precursor
+  text: "/ServerInfo/Guidebook/Persistence/Precursor.xml"
+  children:
+  - Dealer
+  - BountyHunter
+  - Purchases
+  - SectorChaos
+
+- type: guideEntry
+  id: Dealer
+  name: Dealer
+  text: "/ServerInfo/Guidebook/Persistence/Dealer.xml"
+
+- type: guideEntry
+  id: BountyHunter
+  name: Bounty Hunter & Assassin
+  text: "/ServerInfo/Guidebook/Persistence/Hunter.xml"
+
+- type: guideEntry
+  id: Purchases
+  name: Precursor Purchases
+  text: "/ServerInfo/Guidebook/Persistence/Purchases.xml"
+
+- type: guideEntry
+  id: SectorChaos
+  name: Sector Chaos
+  text: "/ServerInfo/Guidebook/Persistence/SectorChaos.xml"

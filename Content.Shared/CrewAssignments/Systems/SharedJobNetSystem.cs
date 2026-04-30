@@ -1,8 +1,10 @@
 using Content.Shared.CrewAssignments.Components;
+using Content.Shared.DoAfter;
 using Content.Shared.Precursor;
 using Content.Shared.StatusEffectNew.Components;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Serialization;
 using Robust.Shared.Timing;
 using System;
 using System.Collections.Generic;
@@ -69,5 +71,13 @@ public abstract partial class SharedJobNetSystem : EntitySystem
             }
         }
     }
+    [Serializable, NetSerializable]
+    public sealed partial class PrecursorExtractorDoAfterEvent : DoAfterEvent
+    {
+        public PrecursorExtractorDoAfterEvent()
+        {
+        }
 
+        public override DoAfterEvent Clone() => this;
+    }
 }

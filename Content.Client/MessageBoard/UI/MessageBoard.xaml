@@ -1,0 +1,64 @@
+<controls:FancyWindow xmlns="https://spacestation14.io"
+                           xmlns:gfx="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
+                           xmlns:controls="clr-namespace:Content.Client.UserInterface.Controls"
+                           SetSize="600 690"
+                           MinSize="600 690">
+    <BoxContainer Orientation="Vertical">
+        <ScrollContainer VerticalExpand="True">
+            <TabContainer>
+                <BoxContainer Orientation="Vertical" Name="PublicBoard">
+                    <Button Text="Create A New Entry" Name="CreateEntryPublicButton" Access="Public" />
+                    <BoxContainer Orientation="Vertical" Name="PublicBoardEntries" />
+                    <PanelContainer VerticalExpand="True"
+                                    HorizontalExpand="True"
+                               SizeFlagsStretchRatio="1"
+                               Name="PublicBoardEntriesPC">
+                        <PanelContainer.PanelOverride>
+                            <gfx:StyleBoxFlat BackgroundColor="#000000" />
+                        </PanelContainer.PanelOverride>
+                        <ScrollContainer VerticalExpand="True">
+                            <BoxContainer Orientation="Vertical" Margin="5" MinHeight ="10">
+                                <BoxContainer Name="PublicBoardEntriesBC"
+                                              Orientation="Vertical"
+                                              VerticalExpand="True">
+
+                                    <PanelContainer StyleClasses="BackgroundPanel" HorizontalExpand="True" MinHeight="30" Margin="10 10 10 0">
+                                        <BoxContainer
+                                        HorizontalExpand="True"
+                                        Orientation="Vertical">
+                                            <BoxContainer Orientation="Horizontal">
+                                                <Label Text="(JOB) Looking for engineers to help with a shuttle." StyleClasses="LabelKeyText" />
+                                                <Control HorizontalExpand="True" />
+                                                <Button Text="View" />
+                                            </BoxContainer>
+                                            <Label Access="Public" Name="RewardLabel" Text="Posted by Chester Cheetah" />
+                                            <BoxContainer Orientation="Horizontal">
+                                                <Label Access="Public" Text="14:17 2246-05-01" />
+                                                <Control HorizontalExpand="True" />
+                                                <Label Access="Public" Text="0 Comments" />
+                                            </BoxContainer>
+                                            
+                                        </BoxContainer>
+                                    </PanelContainer>
+                                    <PanelContainer StyleClasses="BackgroundPanel" HorizontalExpand="True" MinHeight="30" Margin="10 10 10 0">
+                                        <BoxContainer
+                                        HorizontalExpand="True"
+                                        Orientation="Vertical">
+                                            <Label Access="Public" Name="ObjectiveLabel2" Text="Get high from space mirage." />
+                                            <Label Access="Public" Name="RewardLabel2" Text="Reward: 100 Precursor" />
+                                            <Label Access="Public" Name="SectorChaosLabel2" Text="Sector chaos will slightly increase" />
+                                        </BoxContainer>
+                                    </PanelContainer>
+                                </BoxContainer>
+                            </BoxContainer>
+                        </ScrollContainer>
+                    </PanelContainer>
+                </BoxContainer>
+                <BoxContainer Orientation="Vertical" Name="DirectMessages">
+                    
+
+                </BoxContainer>
+            </TabContainer>
+        </ScrollContainer> 
+    </BoxContainer>
+</controls:FancyWindow>

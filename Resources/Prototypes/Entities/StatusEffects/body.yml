@@ -75,13 +75,13 @@
 
 - type: entity
   parent: StaminaModifierStatusEffect
-  name: 2x-max-stamina
+  name: max-stamina-twotimes
   id: StatusEffectDesoxyStamina
 
 - type: entity
   parent: StaminaModifierStatusEffect
   id: StatusEffectStimulantsStamina
-  name: 1.5x-max-stamina
+  name: max-stamina-onehalftimes
   components:
   - type: StaminaModifierStatusEffect
     modifier: 1.5

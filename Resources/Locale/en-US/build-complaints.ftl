@@ -10,5 +10,5 @@ stunned = stunned
 barkaccent = barkaccent
 forced-sleep = forced sleep
 pain-numbness = pain numbness
-1.5x-max-stamina = 1.5x max stamina
-2x-max-stamina = 2x max stamina
+max-stamina-onehalftimes = 1.5x max stamina
+max-stamina-twotimes = 2x max stamina

@@ -1,0 +1,17 @@
+Factions = Factions
+FactionCreation = Faction Creation
+FactionModification = Faction Modification
+TheThreshold = The Threshold
+MakingMoney = Making Money
+ThresholdCargo = Threshold Cargo
+ThresholdMiningHunting = Threshold Mining/Hunting
+ThresholdScience = Threshold Science
+Death = Death
+Achievements = Achievements
+GridControl = Grid Control
+AccessControl = Access Control
+Precursor = Precursor
+Dealer = Dealer
+BountyHunter = Bounty Hunter & Assassin
+PrecursorPurchases = Precursor Purchases
+SectorChaos = Sector Chaos

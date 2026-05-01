@@ -8,18 +8,18 @@
 
 - type: guideEntry
   id: FactionCreation
-  name: Faction Creation
+  name: FactionCreation
   text: "/ServerInfo/Guidebook/Persistence/FactionCreation.xml"
 
 - type: guideEntry
   id: FactionModification
-  name: Faction Modification
+  name: FactionModification
   text: "/ServerInfo/Guidebook/Persistence/FactionModification.xml"
 
 
 - type: guideEntry
   id: Threshold
-  name: The Threshold
+  name: TheThreshold
   text: "/ServerInfo/Guidebook/Persistence/Threshold.xml"
   children:
   - MakingMoney
@@ -33,22 +33,22 @@
 
 - type: guideEntry
   id: MakingMoney
-  name: Making Money
+  name: MakingMoney
   text: "/ServerInfo/Guidebook/Persistence/MakingMoney.xml"
 
 - type: guideEntry
   id: ThresholdCargo
-  name: Threshold Cargo
+  name: ThresholdCargo
   text: "/ServerInfo/Guidebook/Persistence/ThresholdCargo.xml"
 
 - type: guideEntry
   id: ThresholdMiningHunting
-  name: Threshold Mining/Hunting
+  name: ThresholdMiningHunting
   text: "/ServerInfo/Guidebook/Persistence/ThresholdMiningHunting.xml"
 
 - type: guideEntry
   id: ThresholdScience
-  name: Threshold Science
+  name: ThresholdScience
   text: "/ServerInfo/Guidebook/Persistence/ThresholdScience.xml"
 
 - type: guideEntry
@@ -63,12 +63,12 @@
 
 - type: guideEntry
   id: GridControl
-  name: Grid Control
+  name: GridControl
   text: "/ServerInfo/Guidebook/Persistence/GridControl.xml"
 
 - type: guideEntry
   id: AccessControl
-  name: Access Control
+  name: AccessControl
   text: "/ServerInfo/Guidebook/Persistence/AccessControl.xml"
 
 - type: guideEntry
@@ -88,15 +88,15 @@
 
 - type: guideEntry
   id: BountyHunter
-  name: Bounty Hunter & Assassin
+  name: BountyHunter
   text: "/ServerInfo/Guidebook/Persistence/Hunter.xml"
 
 - type: guideEntry
   id: Purchases
-  name: Precursor Purchases
+  name: PrecursorPurchases
   text: "/ServerInfo/Guidebook/Persistence/Purchases.xml"
 
 - type: guideEntry
   id: SectorChaos
-  name: Sector Chaos
+  name: SectorChaos
   text: "/ServerInfo/Guidebook/Persistence/SectorChaos.xml"

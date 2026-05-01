@@ -134,6 +134,7 @@
 - type: cargoBounty
   id: BountyFlower
   reward: 660
+  description: bounty-description-flower
   idPrefix: CC
   entries:
   - name: bounty-item-flower

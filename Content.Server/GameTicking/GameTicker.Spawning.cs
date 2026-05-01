@@ -150,6 +150,8 @@ namespace Content.Server.GameTicking
             bool silent = false)
         {
             var character = GetPlayerProfile(player);
+            if (character == null)
+                return;
 
             var jobBans = _banManager.GetJobBans(player.UserId);
             if (jobBans == null || jobId != null && jobBans.Contains(jobId)) //TODO: use IsRoleBanned directly?

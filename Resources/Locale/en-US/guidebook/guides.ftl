@@ -117,6 +117,7 @@ guide-entry-biological = Biological
 guide-entry-botanical = Botanical
 guide-entry-special = Special
 guide-entry-others = Others
+guide-entry-tests = Tests
 
 guide-entry-pizza-recipes = Pizzas
 guide-entry-savory-recipes = Savory Foods

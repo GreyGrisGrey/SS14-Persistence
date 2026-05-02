@@ -105,6 +105,7 @@ guide-entry-radio = Radio and Speech
 guide-entry-references = Tables & References
 guide-entry-chemicals = Chemicals
 guide-entry-drinks = Drinks
+guide-entry-entities = Entity Recipes
 guide-entry-foodrecipes = Food Recipes
 
 guide-entry-elements = Elements
@@ -117,7 +118,6 @@ guide-entry-biological = Biological
 guide-entry-botanical = Botanical
 guide-entry-special = Special
 guide-entry-others = Others
-guide-entry-tests = Tests
 
 guide-entry-pizza-recipes = Pizzas
 guide-entry-savory-recipes = Savory Foods

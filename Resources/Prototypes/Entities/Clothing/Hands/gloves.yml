@@ -665,7 +665,6 @@
   - type: GuideHelp
     guides:
     - Security
-    - Antagonists
 
 - type: entity #Admeme
   parent: ClothingHandsKnuckleDusters

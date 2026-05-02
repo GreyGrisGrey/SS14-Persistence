@@ -69,7 +69,7 @@ public sealed partial class GuideReagentGroupEmbed : BoxContainer, IDocumentTag
 
         if (group == "Precipitate")
         {
-            HashSet<string> precipitateDict = new HashSet<string>();
+            Dictionary<string, GuideReagentEmbed> precipitateDict = new Dictionary<string, GuideReagentEmbed>();
             var prototypes = _prototype.EnumeratePrototypes<ReactionPrototype>()
                 .Where(p => !p.Source && p.Effects.Length >= 1)
                 .OrderBy(p => p.Priority)
@@ -82,12 +82,14 @@ public sealed partial class GuideReagentGroupEmbed : BoxContainer, IDocumentTag
                 IEnumerable<Shared.EntityEffects.Effects.EntitySpawning.SpawnEntity> spawnEvents = reagent.Effects.OfType<Shared.EntityEffects.Effects.EntitySpawning.SpawnEntity>();
                 if (spawnEvents.Count() == 0)
                     continue;
-                var spawnId = spawnEvents.First().Entity;
-                if (precipitateDict.Contains(spawnId))
+                var spawnId = _prototype.Index<EntityPrototype>(spawnEvents.First().Entity).Name;
+                if (precipitateDict.ContainsKey(spawnId))
                     continue;
-                precipitateDict.Add(spawnId);
-                var embed = new GuideReagentEmbed(reagent);
-                GroupContainer.AddChild(embed);
+                precipitateDict.Add(spawnId, new GuideReagentEmbed(reagent));
+            }
+            foreach (var key in precipitateDict.Keys.OrderBy(k => k))
+            {
+                GroupContainer.AddChild(precipitateDict[key]);
             }
         }
         else

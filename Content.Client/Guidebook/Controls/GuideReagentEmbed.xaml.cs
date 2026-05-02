@@ -382,7 +382,7 @@ public sealed partial class GuideReagentEmbed : BoxContainer, IDocumentTag, ISea
         SourcesContainer.Visible = false;
 
         FormattedMessage description = new();
-        description.AddText("glooby");
+        description.AddText(_prototype.Index<EntityPrototype>(spawnId).Description);
 
 
         ReagentDescription.SetMessage(description);

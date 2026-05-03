@@ -6,3 +6,5 @@
 // So we can't really parallelize integration tests harder either until the runtime fixes that,
 // *or* we fix serv3 to not spam expression trees.
 [assembly: LevelOfParallelism(2)]
+
+[assembly: Timeout(8000)]

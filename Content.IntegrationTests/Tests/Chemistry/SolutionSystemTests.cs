@@ -50,7 +50,7 @@ public sealed class SolutionSystemTests
     private const string Water = "Water";
     private const string Oil = "Oil";
 
-    [Test]
+    [Test, CancelAfter(10000)]
     public async Task TryAddTwoNonReactiveReagent()
     {
         await using var pair = await PoolManager.GetServerClient();
@@ -94,7 +94,7 @@ public sealed class SolutionSystemTests
 
     // This test mimics current behavior
     // i.e. if adding too much `TryAddSolution` adding will fail
-    [Test]
+    [Test, CancelAfter(10000)]
     public async Task TryAddTooMuchNonReactiveReagent()
     {
         await using var pair = await PoolManager.GetServerClient();
@@ -138,7 +138,7 @@ public sealed class SolutionSystemTests
     }
 
     // Unlike TryAddSolution this adds and two solution without then splits leaving only threshold in original
-    [Test]
+    [Test, CancelAfter(10000)]
     public async Task TryMixAndOverflowTooMuchReagent()
     {
         await using var pair = await PoolManager.GetServerClient();
@@ -193,7 +193,7 @@ public sealed class SolutionSystemTests
     }
 
     // TryMixAndOverflow will fail if Threshold larger than MaxVolume
-    [Test]
+    [Test, CancelAfter(10000)]
     public async Task TryMixAndOverflowTooBigOverflow()
     {
         await using var pair = await PoolManager.GetServerClient();
@@ -230,7 +230,7 @@ public sealed class SolutionSystemTests
         await pair.CleanReturnAsync();
     }
 
-    [Test]
+    [Test, CancelAfter(10000)]
     public async Task TestTemperatureCalculations()
     {
         await using var pair = await PoolManager.GetServerClient();

@@ -9,7 +9,7 @@ namespace Content.IntegrationTests.Tests.Chemistry;
 [TestOf(typeof(ReagentData))]
 public sealed class ReagentDataTest
 {
-    [Test]
+    [Test, CancelAfter(10000)]
     public async Task ReagentDataIsSerializable()
     {
         await using var pair = await PoolManager.GetServerClient();

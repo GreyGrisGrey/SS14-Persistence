@@ -27,7 +27,7 @@ namespace Content.IntegrationTests.Tests.Chemistry
 
         private static string[] _reactions = GameDataScrounger.PrototypesOfKind<ReactionPrototype>();
 
-        [Test]
+        [Test, CancelAfter(10000)]
         [TestCaseSource(nameof(_reactions))]
         [TestOf(typeof(ReactionPrototype))]
         [Description("Tries an individual reaction to see if it succeeds.")]

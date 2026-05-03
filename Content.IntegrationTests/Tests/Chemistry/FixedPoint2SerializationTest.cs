@@ -14,7 +14,7 @@ namespace Content.IntegrationTests.Tests.Chemistry
             typeof(FixedPoint2SerializationTest).Assembly
         ];
 
-        [Test]
+        [Test, CancelAfter(10000)]
         public void DeserializeNullTest()
         {
             var node = ValueDataNode.Null();
@@ -23,14 +23,14 @@ namespace Content.IntegrationTests.Tests.Chemistry
             Assert.That(unit, Is.Null);
         }
 
-        [Test]
+        [Test, CancelAfter(10000)]
         public void SerializeNullTest()
         {
             var node = Serialization.WriteValue<FixedPoint2?>(null);
             Assert.That(node.IsNull);
         }
 
-        [Test]
+        [Test, CancelAfter(10000)]
         public void SerializeNullableValueTest()
         {
             var node = Serialization.WriteValue<FixedPoint2?>(FixedPoint2.New(2.5f));
@@ -40,7 +40,7 @@ namespace Content.IntegrationTests.Tests.Chemistry
 #pragma warning restore NUnit2045
         }
 
-        [Test]
+        [Test, CancelAfter(10000)]
         public void DeserializeNullDefinitionTest()
         {
             var node = new MappingDataNode().Add("unit", ValueDataNode.Null());

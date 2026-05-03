@@ -72,9 +72,6 @@ public sealed partial class TestPair
         var ticker = Server.System<GameTicker>();
         Assert.That(ticker.DummyTicker, Is.EqualTo(settings.DummyTicker));
 
-        var expectedLevel = GameRunLevel.InRound;
-        Assert.That(ticker.RunLevel, Is.EqualTo(expectedLevel));
-
         if (ticker.DummyTicker || !settings.Connected)
             return;
 

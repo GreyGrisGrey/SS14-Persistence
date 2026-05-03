@@ -11,12 +11,12 @@ namespace Content.IntegrationTests.Tests.Chemistry;
 [TestOf(typeof(ChemicalReactionSystem))]
 public sealed class SolutionRoundingTest
 {
-    // This test tests two things:
-    // * A rounding error in reaction code while I was making chloral hydrate
-    // * An assert with solution heat capacity calculations that I found a repro for while testing the above.
+  // This test tests two things:
+  // * A rounding error in reaction code while I was making chloral hydrate
+  // * An assert with solution heat capacity calculations that I found a repro for while testing the above.
 
-    [TestPrototypes]
-    private const string Prototypes = @"
+  [TestPrototypes]
+  private const string Prototypes = @"
 - type: entity
   id: SolutionRoundingTestContainer
   components:
@@ -64,64 +64,64 @@ public sealed class SolutionRoundingTest
     SolutionRoundingTestReagentD: 1
 ";
 
-    private const string SolutionRoundingTestReagentA = "SolutionRoundingTestReagentA";
-    private const string SolutionRoundingTestReagentB = "SolutionRoundingTestReagentB";
-    private const string SolutionRoundingTestReagentC = "SolutionRoundingTestReagentC";
-    private const string SolutionRoundingTestReagentD = "SolutionRoundingTestReagentD";
+  private const string SolutionRoundingTestReagentA = "SolutionRoundingTestReagentA";
+  private const string SolutionRoundingTestReagentB = "SolutionRoundingTestReagentB";
+  private const string SolutionRoundingTestReagentC = "SolutionRoundingTestReagentC";
+  private const string SolutionRoundingTestReagentD = "SolutionRoundingTestReagentD";
 
-    [Test]
-    public async Task Test()
+  [Test, CancelAfter(10000)]
+  public async Task Test()
+  {
+    await using var pair = await PoolManager.GetServerClient();
+    var server = pair.Server;
+    var testMap = await pair.CreateTestMap();
+
+    Solution solution = default;
+    Entity<SolutionComponent> solutionEnt = default;
+
+    await server.WaitPost(() =>
     {
-        await using var pair = await PoolManager.GetServerClient();
-        var server = pair.Server;
-        var testMap = await pair.CreateTestMap();
+      var system = server.System<SharedSolutionContainerSystem>();
+      var beaker = server.EntMan.SpawnEntity("SolutionRoundingTestContainer", testMap.GridCoords);
 
-        Solution solution = default;
-        Entity<SolutionComponent> solutionEnt = default;
+      system.TryGetSolution(beaker, "beaker", out var newSolutionEnt, out var newSolution);
 
-        await server.WaitPost(() =>
-        {
-            var system = server.System<SharedSolutionContainerSystem>();
-            var beaker = server.EntMan.SpawnEntity("SolutionRoundingTestContainer", testMap.GridCoords);
+      solutionEnt = newSolutionEnt!.Value;
+      solution = newSolution!;
 
-            system.TryGetSolution(beaker, "beaker", out var newSolutionEnt, out var newSolution);
+      system.TryAddSolution(solutionEnt, new Solution(SolutionRoundingTestReagentC, 50));
+      system.TryAddSolution(solutionEnt, new Solution(SolutionRoundingTestReagentB, 30));
 
-            solutionEnt = newSolutionEnt!.Value;
-            solution = newSolution!;
+      for (var i = 0; i < 9; i++)
+      {
+        system.TryAddSolution(solutionEnt, new Solution(SolutionRoundingTestReagentA, 10));
+      }
+    });
 
-            system.TryAddSolution(solutionEnt, new Solution(SolutionRoundingTestReagentC, 50));
-            system.TryAddSolution(solutionEnt, new Solution(SolutionRoundingTestReagentB, 30));
-
-            for (var i = 0; i < 9; i++)
-            {
-                system.TryAddSolution(solutionEnt, new Solution(SolutionRoundingTestReagentA, 10));
-            }
-        });
-
-        await server.WaitAssertion(() =>
-        {
-            Assert.Multiple(() =>
-            {
-                Assert.That(
+    await server.WaitAssertion(() =>
+    {
+      Assert.Multiple(() =>
+          {
+            Assert.That(
                     solution.ContainsReagent(SolutionRoundingTestReagentA, null),
                     Is.False,
                     "Solution should not contain reagent A");
 
-                Assert.That(
+            Assert.That(
                     solution.ContainsReagent(SolutionRoundingTestReagentB, null),
                     Is.False,
                     "Solution should not contain reagent B");
 
-                Assert.That(
+            Assert.That(
                     solution![new ReagentId(SolutionRoundingTestReagentC, null)].Quantity,
                     Is.EqualTo((FixedPoint2)20));
 
-                Assert.That(
+            Assert.That(
                     solution![new ReagentId(SolutionRoundingTestReagentD, null)].Quantity,
                     Is.EqualTo((FixedPoint2)30));
-            });
-        });
+          });
+    });
 
-        await pair.CleanReturnAsync();
-    }
+    await pair.CleanReturnAsync();
+  }
 }

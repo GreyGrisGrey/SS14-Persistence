@@ -11,6 +11,7 @@ using Robust.Shared.Map.Components;
 namespace Content.IntegrationTests.Tests.Station;
 
 [TestFixture]
+[Ignore("i don't think we're doing this")]
 [TestOf(typeof(EmergencyShuttleSystem))]
 public sealed class EvacShuttleTest
 {

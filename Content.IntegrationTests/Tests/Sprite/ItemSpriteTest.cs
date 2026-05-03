@@ -18,7 +18,7 @@ namespace Content.IntegrationTests.Tests.Sprite;
 /// - inherits from BaseItem despite not being an item
 /// - Shouldn't have an item component
 /// - Is missing the required sprite information.
-/// If none of the abveo are true, it might need to be added to the list of ignored components, see
+/// If none of the above are true, it might need to be added to the list of ignored components, see
 /// <see cref="Ignored"/>
 /// </remarks>
 [TestFixture]

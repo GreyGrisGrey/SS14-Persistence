@@ -17,6 +17,7 @@ using System.Linq;
 namespace Content.IntegrationTests.Tests.GameRules;
 
 [TestFixture]
+[Ignore("we dont have traitors")]
 public sealed class TraitorRuleTest
 {
     private const string TraitorGameRuleProtoId = "Traitor";

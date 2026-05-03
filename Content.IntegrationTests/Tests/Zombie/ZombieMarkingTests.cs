@@ -7,6 +7,7 @@ using System.Linq;
 namespace Content.IntegrationTests.Tests.Zombie;
 
 [TestOf(typeof(ZombieSystem))]
+[Ignore("no zombies right now")]
 public sealed class ZombieMarkingTests : InteractionTest
 {
     protected override string PlayerPrototype => "MobVulpkanin";

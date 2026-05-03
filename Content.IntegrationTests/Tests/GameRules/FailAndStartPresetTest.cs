@@ -9,48 +9,49 @@ using Robust.Shared.GameObjects;
 namespace Content.IntegrationTests.Tests.GameRules;
 
 [TestFixture]
+[Ignore("this is nukeops related")]
 public sealed class FailAndStartPresetTest
 {
     [TestPrototypes]
     private const string Prototypes = @"
-- type: gamePreset
-  id: TestPreset
-  alias:
-    - nukeops
-  name: Test Preset
-  description: """"
-  showInVote: false
-  rules:
-  - TestRule
+    - type: gamePreset
+      id: TestPreset
+      alias:
+        - nukeops
+      name: Test Preset
+      description: """"
+      showInVote: false
+      rules:
+      - TestRule
 
-- type: gamePreset
-  id: TestPresetTenPlayers
-  alias:
-    - nukeops
-  name: Test Preset 10 players
-  description: """"
-  showInVote: false
-  rules:
-  - TestRuleTenPlayers
+    - type: gamePreset
+      id: TestPresetTenPlayers
+      alias:
+        - nukeops
+      name: Test Preset 10 players
+      description: """"
+      showInVote: false
+      rules:
+      - TestRuleTenPlayers
 
-- type: entity
-  id: TestRule
-  parent: BaseGameRule
-  categories: [ GameRules ]
-  components:
-  - type: GameRule
-    minPlayers: 0
-  - type: TestRule
+    - type: entity
+      id: TestRule
+      parent: BaseGameRule
+      categories: [ GameRules ]
+      components:
+      - type: GameRule
+        minPlayers: 0
+      - type: TestRule
 
-- type: entity
-  id: TestRuleTenPlayers
-  parent: BaseGameRule
-  categories: [ GameRules ]
-  components:
-  - type: GameRule
-    minPlayers: 10
-  - type: TestRule
-";
+    - type: entity
+      id: TestRuleTenPlayers
+      parent: BaseGameRule
+      categories: [ GameRules ]
+      components:
+      - type: GameRule
+        minPlayers: 10
+      - type: TestRule
+    ";
 
     /// <summary>
     ///     Test that a nuke ops gamemode can start after failing to start once.

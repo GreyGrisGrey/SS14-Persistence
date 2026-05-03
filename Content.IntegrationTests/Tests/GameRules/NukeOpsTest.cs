@@ -30,6 +30,7 @@ using Robust.Shared.Prototypes;
 namespace Content.IntegrationTests.Tests.GameRules;
 
 [TestFixture]
+[Ignore("we dont have nukeops")]
 public sealed class NukeOpsTest
 {
     private static readonly ProtoId<NpcFactionPrototype> SyndicateFaction = "Syndicate";

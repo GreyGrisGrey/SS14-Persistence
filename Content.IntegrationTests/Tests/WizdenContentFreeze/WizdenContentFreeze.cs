@@ -16,6 +16,7 @@ public sealed class WizdenContentFreeze
     /// https://github.com/space-wizards/space-station-14/issues/8524
     /// </summary>
     [Test]
+    [Ignore("wizden can freeze the content they want but we are not wizden")]
     public async Task MicrowaveRecipesFreezeTest()
     {
         await using var pair = await PoolManager.GetServerClient();

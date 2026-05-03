@@ -1,0 +1,32 @@
+Test pair initialized.
+#1: Commands.SuicideCommandTests.TestSuicideByHeldItem (started at 11484886720 bytes allocated.)
+Test pair killed.
+   at System.Environment.get_StackTrace()
+   at Robust.UnitTesting.Pool.TestPair`2.Kill() in C:\greybox\persist\SS14-Persistence\RobustToolbox\Robust.UnitTesting\Pool\TestPair.cs:line 127
+   at Robust.UnitTesting.Pool.TestPair`2.OnDirtyDispose() in C:\greybox\persist\SS14-Persistence\RobustToolbox\Robust.UnitTesting\Pool\TestPair.Recycle.cs:line 42
+   at Robust.UnitTesting.Pool.TestPair`2.OnDirtyDispose()
+   at Robust.UnitTesting.Pool.TestPair`2.DisposeAsync() in C:\greybox\persist\SS14-Persistence\RobustToolbox\Robust.UnitTesting\Pool\TestPair.Recycle.cs:line 150
+   at Robust.UnitTesting.Pool.TestPair`2.DisposeAsync()
+   at Content.IntegrationTests.Tests.Commands.SuicideCommandTests.TestSuicideByHeldItem() in C:\greybox\persist\SS14-Persistence\Content.IntegrationTests\Tests\Commands\SuicideCommandTests.cs:line 296
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AsyncStateMachineBox`1.MoveNext()
+   at System.Threading.Tasks.AwaitTaskContinuation.RunOrScheduleAction(IAsyncStateMachineBox box, Boolean allowInlining)
+   at System.Threading.Tasks.Task.RunContinuations(Object continuationObject)
+   at System.Threading.Tasks.Task.FinishStageTwo()
+   at System.Threading.Tasks.Task.FinishSlow(Boolean userDelegateExecute)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder.SetException(Exception exception)
+   at Robust.UnitTesting.RobustIntegrationTest.IntegrationInstance.WaitAssertion(Action assertion) in C:\greybox\persist\SS14-Persistence\RobustToolbox\Robust.UnitTesting\RobustIntegrationTest.cs:line 610
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AsyncStateMachineBox`1.MoveNext()
+   at System.Threading.Tasks.AwaitTaskContinuation.RunOrScheduleAction(IAsyncStateMachineBox box, Boolean allowInlining)
+   at System.Threading.Tasks.Task.RunContinuations(Object continuationObject)
+   at System.Threading.Tasks.Task.FinishStageTwo()
+   at System.Threading.Tasks.Task.FinishSlow(Boolean userDelegateExecute)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder.SetException(Exception exception)
+   at Robust.UnitTesting.RobustIntegrationTest.IntegrationInstance.WaitIdleImplAsync(Boolean throwOnUnhandled, CancellationToken cancellationToken) in C:\greybox\persist\SS14-Persistence\RobustToolbox\Robust.UnitTesting\RobustIntegrationTest.cs:line 499
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AsyncStateMachineBox`1.MoveNext()
+   at System.Threading.Channels.AsyncOperation.System.Threading.IThreadPoolWorkItem.Execute()
+   at System.Threading.ThreadPoolWorkQueue.Dispatch()
+   at System.Threading.PortableThreadPool.WorkerThread.WorkerThreadStart()
+   at System.Threading.Thread.StartCallback()

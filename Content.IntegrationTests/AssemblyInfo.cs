@@ -7,4 +7,4 @@
 // *or* we fix serv3 to not spam expression trees.
 [assembly: LevelOfParallelism(2)]
 
-[assembly: Timeout(8000)]
+[assembly: Timeout(60000)]

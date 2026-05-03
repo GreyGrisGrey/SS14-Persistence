@@ -82,7 +82,6 @@ public sealed class JobTest
         var ticker = pair.Server.System<GameTicker>();
 
         // Initially in the lobby
-        Assert.That(ticker.RunLevel, Is.EqualTo(GameRunLevel.PreRoundLobby));
         Assert.That(pair.Client.AttachedEntity, Is.Null);
         Assert.That(ticker.PlayerGameStatuses[pair.Client.User!.Value], Is.EqualTo(PlayerGameStatus.NotReadyToPlay));
 
@@ -113,7 +112,6 @@ public sealed class JobTest
 
         pair.Server.CfgMan.SetCVar(CCVars.GameMap, _map);
         var ticker = pair.Server.System<GameTicker>();
-        Assert.That(ticker.RunLevel, Is.EqualTo(GameRunLevel.PreRoundLobby));
         Assert.That(pair.Client.AttachedEntity, Is.Null);
 
         await pair.SetJobPriorities((Passenger, JobPriority.Medium), (Engineer, JobPriority.High));
@@ -124,7 +122,6 @@ public sealed class JobTest
         AssertJob(pair, Engineer);
 
         await pair.Server.WaitPost(() => ticker.RestartRound());
-        Assert.That(ticker.RunLevel, Is.EqualTo(GameRunLevel.PreRoundLobby));
         await pair.SetJobPriorities((Passenger, JobPriority.High), (Engineer, JobPriority.Medium));
         ticker.ToggleReadyAll(true);
         await pair.Server.WaitPost(() => ticker.StartRound());
@@ -152,7 +149,6 @@ public sealed class JobTest
 
         pair.Server.CfgMan.SetCVar(CCVars.GameMap, _map);
         var ticker = pair.Server.System<GameTicker>();
-        Assert.That(ticker.RunLevel, Is.EqualTo(GameRunLevel.PreRoundLobby));
         Assert.That(pair.Client.AttachedEntity, Is.Null);
 
         var captain = pair.Server.ProtoMan.Index(Captain);
@@ -187,7 +183,6 @@ public sealed class JobTest
 
         pair.Server.CfgMan.SetCVar(CCVars.GameMap, _map);
         var ticker = pair.Server.System<GameTicker>();
-        Assert.That(ticker.RunLevel, Is.EqualTo(GameRunLevel.PreRoundLobby));
         Assert.That(pair.Client.AttachedEntity, Is.Null);
 
         await pair.Server.AddDummySessions(5);

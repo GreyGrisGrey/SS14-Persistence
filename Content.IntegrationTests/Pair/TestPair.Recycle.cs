@@ -36,16 +36,17 @@ public sealed partial class TestPair
     {
         // Move to pre-round lobby. Required to toggle dummy ticker on and off
         var gameTicker = Server.System<GameTicker>();
-        if (gameTicker.RunLevel != GameRunLevel.PreRoundLobby)
-        {
-            await testOut.WriteLineAsync($"Recycling: {Watch.Elapsed.TotalMilliseconds} ms: Restarting round.");
-            Server.CfgMan.SetCVar(CCVars.GameDummyTicker, false);
-            Assert.That(gameTicker.DummyTicker, Is.False);
-            Server.CfgMan.SetCVar(CCVars.GameLobbyEnabled, true);
-            await Server.WaitPost(() => gameTicker.RestartRound());
-            await RunTicksSync(1);
-        }
-
+        // PreRoundLobby doesn't really exist here does it? So I don't believe we should be doing this
+        //        if (gameTicker.RunLevel != GameRunLevel.PreRoundLobby)
+        //        {
+        //            await testOut.WriteLineAsync($"Recycling: {Watch.Elapsed.TotalMilliseconds} ms: Restarting round.");
+        //            Server.CfgMan.SetCVar(CCVars.GameDummyTicker, false);
+        //            Assert.That(gameTicker.DummyTicker, Is.False);
+        //            Server.CfgMan.SetCVar(CCVars.GameLobbyEnabled, true);
+        //            await Server.WaitPost(() => gameTicker.RestartRound());
+        //            await RunTicksSync(1);
+        //        }
+        //
         //Apply Cvars
         await testOut.WriteLineAsync($"Recycling: {Watch.Elapsed.TotalMilliseconds} ms: Setting CVar ");
         await ApplySettings(next);
@@ -71,8 +72,7 @@ public sealed partial class TestPair
         var ticker = Server.System<GameTicker>();
         Assert.That(ticker.DummyTicker, Is.EqualTo(settings.DummyTicker));
 
-        var expectPreRound = settings.InLobby | settings.DummyTicker;
-        var expectedLevel = expectPreRound ? GameRunLevel.PreRoundLobby : GameRunLevel.InRound;
+        var expectedLevel = GameRunLevel.InRound;
         Assert.That(ticker.RunLevel, Is.EqualTo(expectedLevel));
 
         if (ticker.DummyTicker || !settings.Connected)

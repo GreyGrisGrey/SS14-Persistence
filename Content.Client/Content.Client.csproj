@@ -33,7 +33,16 @@
     <AdditionalFiles Update="GridControl\UI\StationTaggerWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
     </AdditionalFiles>
+    <AdditionalFiles Update="MessageBoard\UI\CommentHeader.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </AdditionalFiles>
     <AdditionalFiles Update="MessageBoard\UI\CreateEntry.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </AdditionalFiles>
+    <AdditionalFiles Update="MessageBoard\UI\EntryHeader.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </AdditionalFiles>
+    <AdditionalFiles Update="MessageBoard\UI\EntryWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
     </AdditionalFiles>
   </ItemGroup>

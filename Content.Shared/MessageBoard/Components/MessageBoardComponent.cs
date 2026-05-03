@@ -20,14 +20,17 @@ public sealed partial class MessageBoardComponent : Component
 [Virtual]
 public partial class MessageBoardEntry
 {
+    public int UID;
     public string Title;
     public string Author;
     public string Body;
     public DateTime CreationTime;
     public List<MessageBoardComment> Comments = new();
+    public int NextCommentID = 0;
 
-    public MessageBoardEntry(string title, string author, string body)
+    public MessageBoardEntry(int uid, string title, string author, string body)
     {
+        UID = uid;
         Title = title;
         Author = author;
         Body = body;
@@ -41,12 +44,14 @@ public partial class MessageBoardEntry
 [Virtual]
 public partial class MessageBoardComment
 {
+    public int UID;
     public string Author;
     public string Body;
     public DateTime CreationTime;
 
-    public MessageBoardComment(string author, string body)
+    public MessageBoardComment(int uid, string author, string body)
     {
+        UID = uid;
         Author = author;
         Body = body;
         CreationTime = DateTime.Now;
@@ -57,7 +62,12 @@ public partial class MessageBoardComment
 [NetSerializable, Serializable]
 public sealed class MessageBoardInterfaceState : BoundUserInterfaceState
 {
+    public List<MessageBoardEntry> PublicEntries;
 
+    public MessageBoardInterfaceState(List<MessageBoardEntry> publicEntries)
+    {
+        PublicEntries = publicEntries;
+    }
 }
 
 [Serializable, NetSerializable]
@@ -72,3 +82,43 @@ public sealed class MessageBoardCreateEntryPublicMessage : BoundUserInterfaceMes
         Body = body;
     }
 }
+
+[Serializable, NetSerializable]
+public sealed class MessageBoardPostCommentPublicMessage : BoundUserInterfaceMessage
+{
+    public int EntryId;
+    public string Body;
+
+    public MessageBoardPostCommentPublicMessage(int entryId, string body)
+    {
+        EntryId = entryId;
+        Body = body;
+    }
+}
+
+[Serializable, NetSerializable]
+public sealed class MessageBoardDeleteCommentPublicMessage : BoundUserInterfaceMessage
+{
+    public int CommentId;
+    public int EntryId;
+
+
+    public MessageBoardDeleteCommentPublicMessage(int commentId, int entryId)
+    {
+        CommentId = commentId;
+        EntryId = entryId;
+    }
+}
+
+[Serializable, NetSerializable]
+public sealed class MessageBoardDeleteEntryPublicMessage : BoundUserInterfaceMessage
+{
+    public int EntryId;
+    public MessageBoardDeleteEntryPublicMessage(int entryId)
+    {
+        EntryId = entryId;
+    }
+}
+
+
+

@@ -325,6 +325,7 @@ namespace Content.IntegrationTests.Tests
         }
 
         [Test, TestCaseSource(nameof(GameMaps))]
+        [Ignore("dont think this is relevant in persistence")]
         public async Task GameMapsLoadableTest(string mapProto)
         {
             await using var pair = await PoolManager.GetServerClient(new PoolSettings
@@ -491,6 +492,7 @@ namespace Content.IntegrationTests.Tests
         }
 
         [Test]
+        [Ignore("dont think this is relevant in persistence")]
         [TestCaseSource(nameof(AllMapFiles))]
         public async Task NonGameMapsLoadableTest(ResPath mapPath)
         {

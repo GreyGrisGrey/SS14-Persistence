@@ -105,7 +105,10 @@ guide-entry-radio = Radio and Speech
 guide-entry-references = Tables & References
 guide-entry-chemicals = Chemicals
 guide-entry-drinks = Drinks
-guide-entry-entities = Entity Recipes
+guide-entry-entities = Precipitates
+guide-entry-food-precipitate = Food
+guide-entry-sheet-precipitate = Materials
+guide-entry-other-precipitate = Other
 guide-entry-foodrecipes = Food Recipes
 
 guide-entry-elements = Elements

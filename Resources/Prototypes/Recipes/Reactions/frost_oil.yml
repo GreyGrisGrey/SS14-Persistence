@@ -7,7 +7,7 @@
       amount: 10
     FrostOil:
       amount: 5
-  group: Precipitate
+  group: PrecipitateSheet
   effects:
   - !type:SpawnEntity
     entity: IngotGold1
@@ -21,7 +21,7 @@
       amount: 10
     FrostOil:
       amount: 5
-  group: Precipitate
+  group: PrecipitateSheet
   effects:
   - !type:SpawnEntity
     entity: IngotSilver1
@@ -35,7 +35,7 @@
       amount: 10
     FrostOil:
       amount: 5
-  group: Precipitate
+  group: PrecipitateSheet
   effects:
   - !type:SpawnEntity
     entity: IngotCopper1
@@ -49,7 +49,7 @@
       amount: 10
     FrostOil:
       amount: 5
-  group: Precipitate
+  group: PrecipitateSheet
   effects:
   - !type:SpawnEntity
     entity: IngotTin1
@@ -63,7 +63,7 @@
       amount: 10
     Fresium:
       amount: 5
-  group: Precipitate
+  group: PrecipitateSheet
   effects:
   - !type:SpawnEntity
     entity: SheetPlasma1
@@ -79,7 +79,7 @@
       amount: 1
     FrostOil:
       amount: 5
-  group: Precipitate
+  group: PrecipitateSheet
   effects:
   - !type:SpawnEntity
     entity: SheetSteel1
@@ -96,7 +96,7 @@
       amount: 6.7
     FrostOil:
       amount: 5
-  group: Precipitate
+  group: PrecipitateSheet
   effects:
   - !type:SpawnEntity
     entity: SheetBrass1
@@ -113,7 +113,7 @@
       amount: 3.3
     FrostOil:
       amount: 5
-  group: Precipitate
+  group: PrecipitateSheet
   effects:
   - !type:SpawnEntity
     entity: SheetBronze1
@@ -132,7 +132,7 @@
       amount: 1
     Fresium:
       amount: 5
-  group: Precipitate
+  group: PrecipitateSheet
   effects:
   - !type:SpawnEntity
     entity: SheetPlasteel1
@@ -146,7 +146,7 @@
       amount: 10
     Fresium:
       amount: 5
-  group: Precipitate
+  group: PrecipitateSheet
   effects:
   - !type:SpawnEntity
     entity: SheetTitanium1
@@ -160,7 +160,7 @@
       amount: 10
     FrostOil:
       amount: 5
-  group: Precipitate
+  group: PrecipitateSheet
   effects:
   - !type:SpawnEntity
     entity: SheetAluminium1
@@ -174,7 +174,7 @@
       amount: 10
     FrostOil:
       amount: 5
-  group: Precipitate
+  group: PrecipitateSheet
   effects:
   - !type:SpawnEntity
     entity: SheetGlass1
@@ -191,7 +191,7 @@
       amount: 10
     Fresium:
       amount: 5
-  group: Precipitate
+  group: PrecipitateSheet
   effects:
   - !type:SpawnEntity
     entity: SheetPGlass1
@@ -206,7 +206,7 @@
       amount: 10
     Fresium:
       amount: 5
-  group: Precipitate
+  group: PrecipitateSheet
   effects:
   - !type:SpawnEntity
     entity: MaterialBananium1
@@ -225,7 +225,7 @@
       amount: 10
     Fresium:
       amount: 5
-  group: Precipitate
+  group: PrecipitateSheet
   effects:
   - !type:SpawnEntity
     entity: MaterialPhoron1
@@ -246,7 +246,7 @@
       amount: 5
     Fresium:
       amount: 5
-  group: Precipitate
+  group: PrecipitateSheet
   effects:
   - !type:SpawnEntity
     entity: SheetPhoronGlass1
@@ -263,7 +263,7 @@
       amount: 10
     Fresium:
       amount: 5
-  group: Precipitate
+  group: PrecipitateSheet
   effects:
   - !type:SpawnEntity
     entity: SheetUGlass1
@@ -282,7 +282,7 @@
       amount: 6.7
     FrostOil:
       amount: 5
-  group: Precipitate
+  group: PrecipitateSheet
   effects:
   - !type:SpawnEntity
     entity: SheetClockworkGlass1
@@ -296,7 +296,7 @@
       amount: 3
     FrostOil:
       amount: 5
-  group: Precipitate
+  group: PrecipitateSheet
   effects:
   - !type:SpawnEntity
     entity: SheetPaper1
@@ -312,7 +312,7 @@
       amount: 2
     Fresium:
       amount: 5
-  group: Precipitate
+  group: PrecipitateSheet
   effects:
   - !type:SpawnEntity
     entity: SheetUranium1
@@ -328,7 +328,7 @@
       amount: 3
     FrostOil:
       amount: 5
-  group: Precipitate
+  group: PrecipitateSheet
   effects:
   - !type:SpawnEntity
     entity: MaterialSheetMeat1

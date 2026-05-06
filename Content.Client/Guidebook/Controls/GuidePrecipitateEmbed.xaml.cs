@@ -26,7 +26,7 @@ namespace Content.Client.Guidebook.Controls;
 ///     Control for embedding a reagent into a guidebook.
 /// </summary>
 [UsedImplicitly, GenerateTypedNameReferences]
-public sealed partial class GuideReagentEmbed : BoxContainer, IDocumentTag, ISearchableControl, IPrototypeRepresentationControl
+public sealed partial class GuidePrecipitateEmbed : BoxContainer, IDocumentTag, ISearchableControl, IPrototypeRepresentationControl
 {
     [Dependency] private readonly IEntitySystemManager _systemManager = default!;
     [Dependency] private readonly ILogManager _logManager = default!;
@@ -39,7 +39,7 @@ public sealed partial class GuideReagentEmbed : BoxContainer, IDocumentTag, ISea
 
     public IPrototype? RepresentedPrototype { get; private set; }
 
-    public GuideReagentEmbed()
+    public GuidePrecipitateEmbed()
     {
         RobustXamlLoader.Load(this);
         IoCManager.InjectDependencies(this);
@@ -49,12 +49,7 @@ public sealed partial class GuideReagentEmbed : BoxContainer, IDocumentTag, ISea
         MouseFilter = MouseFilterMode.Stop;
     }
 
-    public GuideReagentEmbed(string reagent) : this()
-    {
-        GenerateControl(_prototype.Index<ReagentPrototype>(reagent));
-    }
-
-    public GuideReagentEmbed(ReagentPrototype reagent) : this()
+    public GuidePrecipitateEmbed(ReactionPrototype reagent) : this()
     {
         GenerateControl(reagent);
     }
@@ -84,44 +79,46 @@ public sealed partial class GuideReagentEmbed : BoxContainer, IDocumentTag, ISea
             return false;
         }
 
-        GenerateControl(reagent);
-
         control = this;
         return true;
     }
 
-    private void GenerateControl(ReagentPrototype reagent)
+    private void GenerateControl(ReactionPrototype reagent)
     {
         RepresentedPrototype = reagent;
 
         NameBackground.PanelOverride = new StyleBoxFlat
         {
-            BackgroundColor = reagent.SubstanceColor
+            BackgroundColor = Color.Black
         };
 
-        var r = reagent.SubstanceColor.R;
-        var g = reagent.SubstanceColor.G;
-        var b = reagent.SubstanceColor.B;
+        if (reagent.Effects.Length < 1)
+            return;
+        IEnumerable<Shared.EntityEffects.Effects.EntitySpawning.SpawnEntity> spawnEvents = reagent.Effects.OfType<Shared.EntityEffects.Effects.EntitySpawning.SpawnEntity>();
+        if (spawnEvents.Count() == 0)
+            return;
 
-        var textColor = 0.2126f * r + 0.7152f * g + 0.0722f * b > 0.5
-            ? Color.Black
-            : Color.White;
-
+        var spawnId = spawnEvents.First().Entity;
         ReagentName.SetMarkup(Loc.GetString("guidebook-reagent-name",
-            ("color", textColor), ("name", reagent.LocalizedName)));
+            ("color", Color.White), ("name", _prototype.Index<EntityPrototype>(spawnId).Name)));
 
+        _sawmill.Info($"{reagent.ID}");
         #region Recipe
         var reactions = _prototype.EnumeratePrototypes<ReactionPrototype>()
-            .Where(p => !p.Source && p.Products.ContainsKey(reagent.ID))
-            .OrderBy(p => p.Priority)
-            .ThenBy(p => p.Products.Count)
-            .ToList();
+                .Where(p => !p.Source && p.Effects.Length >= 1)
+                .OrderBy(p => p.Priority)
+                .ThenBy(p => p.Products.Count)
+                .ToList();
 
         if (reactions.Any())
         {
             foreach (var reactionPrototype in reactions)
             {
-                RecipesDescriptionContainer.AddChild(new GuideReagentReaction(reactionPrototype, _prototype, _systemManager));
+                IEnumerable<Shared.EntityEffects.Effects.EntitySpawning.SpawnEntity> stuff = reactionPrototype.Effects.OfType<Shared.EntityEffects.Effects.EntitySpawning.SpawnEntity>();
+                if (stuff.Count() >= 1 && stuff.First().Entity == spawnId)
+                {
+                    RecipesDescriptionContainer.AddChild(new GuideReagentReaction(reactionPrototype, _prototype, _systemManager, spawnId));
+                }
             }
         }
         else
@@ -215,32 +212,11 @@ public sealed partial class GuideReagentEmbed : BoxContainer, IDocumentTag, ISea
             PlantMetabolismsContainer.Visible = false;
         }
         #endregion
-
-        GenerateSources(reagent);
+        SourcesContainer.Visible = false;
 
         FormattedMessage description = new();
-        description.AddText(reagent.LocalizedDescription);
-        description.PushNewline();
-        description.AddMarkupOrThrow(Loc.GetString("guidebook-reagent-physical-description",
-            ("description", reagent.LocalizedPhysicalDescription)));
+        description.AddText(_prototype.Index<EntityPrototype>(spawnId).Description);
 
-        if (_config.GetCVar(CCVars.ContrabandExamine))
-        {
-            // Department-restricted text
-            if (reagent.AllowedJobs.Count > 0 || reagent.AllowedDepartments.Count > 0)
-            {
-                description.PushNewline();
-                description.AddMarkupPermissive(
-                    _contraband.GenerateDepartmentExamineMessage(reagent.AllowedDepartments, reagent.AllowedJobs, ContrabandItemType.Reagent));
-            }
-            // Other contraband text
-            else if (reagent.ContrabandSeverity != null &&
-                     _prototype.Resolve(reagent.ContrabandSeverity.Value, out var severity))
-            {
-                description.PushNewline();
-                description.AddMarkupPermissive(Loc.GetString(severity.ExamineText, ("type", ContrabandItemType.Reagent)));
-            }
-        }
 
         ReagentDescription.SetMessage(description);
     }

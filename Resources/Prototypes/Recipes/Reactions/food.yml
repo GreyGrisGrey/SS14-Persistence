@@ -9,7 +9,7 @@
     Enzyme:
       amount: 5
       catalyst: true
-  group: Precipitate
+  group: PrecipitateFood
   effects:
   - !type:SpawnEntity
       entity: FoodCheese
@@ -25,7 +25,7 @@
     Enzyme:
       amount: 5
       catalyst: true
-  group: Precipitate
+  group: PrecipitateFood
   effects:
   - !type:SpawnEntity
       entity: FoodChevre
@@ -40,7 +40,7 @@
       amount: 15
     Water:
       amount: 10
-  group: Precipitate
+  group: PrecipitateFood
   effects:
   - !type:SpawnEntity
       entity: FoodDough
@@ -57,7 +57,7 @@
       amount: 10
     Egg:
       amount: 6
-  group: Precipitate
+  group: PrecipitateFood
   effects:
   - !type:SpawnEntity
       entity: FoodDoughCornmeal
@@ -72,7 +72,7 @@
       amount: 15
     Water:
       amount: 10
-  group: Precipitate
+  group: PrecipitateFood
   effects:
   - !type:SpawnEntity
       entity: FoodDoughTortilla
@@ -89,7 +89,7 @@
       amount: 5
     Water:
       amount: 10
-  group: Precipitate
+  group: PrecipitateFood
   effects:
   - !type:SpawnEntity
     entity: FoodDoughCotton
@@ -108,7 +108,7 @@
       amount: 5
     Milk:
       amount: 5
-  group: Precipitate
+  group: PrecipitateFood
   effects:
   - !type:SpawnEntity
       entity: FoodCakeBatter
@@ -124,7 +124,7 @@
     TableSalt:
       amount: 5
       catalyst: true
-  group: Precipitate
+  group: PrecipitateFood
   effects:
   - !type:SpawnEntity
       entity: FoodButter
@@ -141,7 +141,7 @@
       amount: 12
     TableSalt:
       amount: 5
-  group: Precipitate
+  group: PrecipitateFood
   effects:
   - !type:SpawnEntity
       entity: FoodDoughPie
@@ -161,7 +161,7 @@
       amount: 15
     Sugar:
       amount: 5
-  group: Precipitate
+  group: PrecipitateFood
   effects:
   - !type:SpawnEntity
       entity: FoodCakeBatter
@@ -177,7 +177,7 @@
     Enzyme:
       amount: 5
       catalyst: true
-  group: Precipitate
+  group: PrecipitateFood
   effects:
   - !type:SpawnEntity
       entity: FoodTofu
@@ -194,7 +194,7 @@
       amount: 5
     Egg:
       amount: 6
-  group: Precipitate
+  group: PrecipitateFood
   effects:
   - !type:SpawnEntity
       entity: FoodMeatMeatball
@@ -211,7 +211,7 @@
       amount: 2
     Sugar:
       amount: 2
-  group: Precipitate
+  group: PrecipitateFood
   effects:
   - !type:SpawnEntity
       entity: FoodSnackChocolateBar

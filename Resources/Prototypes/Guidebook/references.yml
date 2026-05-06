@@ -22,6 +22,28 @@
   name: guide-entry-entities
   text: "/ServerInfo/Guidebook/ReferenceTables/Entities.xml"
   filterEnabled: True
+  children:
+  - FoodPrec
+  - MatPrec
+  - OtherPrec
+
+- type: guideEntry
+  id: FoodPrec
+  name: guide-entry-food-precipitate
+  text: "/ServerInfo/Guidebook/ReferenceTables/Entities.xml"
+  filterEnabled: True
+
+- type: guideEntry
+  id: MatPrec
+  name: guide-entry-sheet-precipitate
+  text: "/ServerInfo/Guidebook/ReferenceTables/Ent2.xml"
+  filterEnabled: True
+
+- type: guideEntry
+  id: OtherPrec
+  name: guide-entry-other-precipitate
+  text: "/ServerInfo/Guidebook/ReferenceTables/Ent3.xml"
+  filterEnabled: True
 
 - type: guideEntry
   id: FoodRecipes

@@ -37,7 +37,7 @@
       amount: 10
     Carbon:
       amount: 10
-  group: Precipitate
+  group: PrecipitateFood
   effects:
     - !type:SpawnEntity
       entity: FoodMeat
@@ -77,7 +77,7 @@
       amount: 3
     SulfuricAcid:
       amount: 2
-  group: Precipitate
+  group: PrecipitateSheet
   effects:
     - !type:SpawnEntity
       entity: SheetPlastic1
@@ -156,7 +156,7 @@
       amount: 15
     Ethanol:
       amount: 5
-  group: Precipitate
+  group: PrecipitateOther
   effects:
     - !type:SpawnEntity
       entity: ShardCrystalRandom
@@ -173,7 +173,7 @@
       amount: 2
     Charcoal:
       amount: 2
-  group: Precipitate
+  group: PrecipitateOther
   effects:
     - !type:SpawnEntity
       entity: MaterialGunpowder

@@ -33,28 +33,12 @@ public sealed partial class GuideReagentGroupEmbed : BoxContainer, IDocumentTag
 
     public GuideReagentGroupEmbed(string group) : this()
     {
-        if (group == "Precipitate")
+        var prototypes = _prototype.EnumeratePrototypes<ReagentPrototype>()
+        .Where(p => p.Group.Equals(group)).OrderBy(p => p.LocalizedName);
+        foreach (var reagent in prototypes)
         {
-            var prototypes = _prototype.EnumeratePrototypes<ReactionPrototype>()
-                .Where(p => !p.Source && p.Effects.Length >= 1)
-                .OrderBy(p => p.Priority)
-                .ThenBy(p => p.Products.Count)
-                .ToList();
-            foreach (var reagent in prototypes)
-            {
-                var embed = new GuideReagentEmbed(reagent);
-                GroupContainer.AddChild(embed);
-            }
-        }
-        else
-        {
-            var prototypes = _prototype.EnumeratePrototypes<ReagentPrototype>()
-            .Where(p => p.Group.Equals(group)).OrderBy(p => p.LocalizedName);
-            foreach (var reagent in prototypes)
-            {
-                var embed = new GuideReagentEmbed(reagent);
-                GroupContainer.AddChild(embed);
-            }
+            var embed = new GuideReagentEmbed(reagent);
+            GroupContainer.AddChild(embed);
         }
     }
 
@@ -67,40 +51,12 @@ public sealed partial class GuideReagentGroupEmbed : BoxContainer, IDocumentTag
             return false;
         }
 
-        if (group == "Precipitate")
+        var prototypes = _prototype.EnumeratePrototypes<ReagentPrototype>()
+        .Where(p => p.Group.Equals(group)).OrderBy(p => p.LocalizedName);
+        foreach (var reagent in prototypes)
         {
-            Dictionary<string, GuideReagentEmbed> precipitateDict = new Dictionary<string, GuideReagentEmbed>();
-            var prototypes = _prototype.EnumeratePrototypes<ReactionPrototype>()
-                .Where(p => !p.Source && p.Effects.Length >= 1)
-                .OrderBy(p => p.Priority)
-                .ThenBy(p => p.Products.Count)
-                .ToList();
-            foreach (var reagent in prototypes)
-            {
-                if (reagent.Effects.Length < 1)
-                    continue;
-                IEnumerable<Shared.EntityEffects.Effects.EntitySpawning.SpawnEntity> spawnEvents = reagent.Effects.OfType<Shared.EntityEffects.Effects.EntitySpawning.SpawnEntity>();
-                if (spawnEvents.Count() == 0)
-                    continue;
-                var spawnId = _prototype.Index<EntityPrototype>(spawnEvents.First().Entity).Name;
-                if (precipitateDict.ContainsKey(spawnId))
-                    continue;
-                precipitateDict.Add(spawnId, new GuideReagentEmbed(reagent));
-            }
-            foreach (var key in precipitateDict.Keys.OrderBy(k => k))
-            {
-                GroupContainer.AddChild(precipitateDict[key]);
-            }
-        }
-        else
-        {
-            var prototypes = _prototype.EnumeratePrototypes<ReagentPrototype>()
-            .Where(p => p.Group.Equals(group)).OrderBy(p => p.LocalizedName);
-            foreach (var reagent in prototypes)
-            {
-                var embed = new GuideReagentEmbed(reagent);
-                GroupContainer.AddChild(embed);
-            }
+            var embed = new GuideReagentEmbed(reagent);
+            GroupContainer.AddChild(embed);
         }
 
         control = this;

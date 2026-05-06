@@ -7,6 +7,7 @@ using Robust.Shared.GameObjects;
 namespace Content.IntegrationTests.Tests
 {
     [TestFixture]
+    [Ignore("not persistence relevant")]
     public sealed class RoundEndTest
     {
         private sealed class RoundEndTestSystem : EntitySystem

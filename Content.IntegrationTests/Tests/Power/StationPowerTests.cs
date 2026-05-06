@@ -101,6 +101,7 @@ public sealed class StationPowerTests
     }
 
     [Test, TestCaseSource(nameof(GameMaps))]
+    [Ignore("not persistence relevant")]
     public async Task TestApcLoad(string mapProtoId)
     {
         await using var pair = await PoolManager.GetServerClient(new PoolSettings

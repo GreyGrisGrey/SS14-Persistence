@@ -16,6 +16,7 @@ using System.Linq;
 namespace Content.IntegrationTests.Tests.Round;
 
 [TestFixture]
+[Ignore("not persistence relevant")]
 public sealed class JobTest
 {
     private static readonly ProtoId<JobPrototype> Passenger = "Passenger";

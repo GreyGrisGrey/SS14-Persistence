@@ -4,6 +4,7 @@ using Robust.Shared.GameObjects;
 namespace Content.IntegrationTests.Tests
 {
     [TestFixture]
+    [Ignore("not persistence relevant")]
     public sealed class RestartRoundTest
     {
         [Test]

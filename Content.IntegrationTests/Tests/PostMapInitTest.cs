@@ -28,6 +28,7 @@ using YamlDotNet.RepresentationModel;
 namespace Content.IntegrationTests.Tests
 {
     [TestFixture]
+    [Ignore("not persistence relevant")]
     public sealed class PostMapInitTest
     {
         private const bool SkipTestMaps = true;

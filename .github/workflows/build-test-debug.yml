@@ -98,7 +98,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        shard: [0, 1, 2, 3, 4, 5, 6, 7]
+        shard: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
     name: "Integration Tests (shard ${{ matrix.shard }})"
     runs-on: ubuntu-latest
     steps:
@@ -123,8 +123,8 @@ jobs:
       env:
         DOTNET_gcServer: "1"
       with:
-        timeout_minutes: 17
-        max_attempts: 2
+        timeout_minutes: 25
+        max_attempts: 1
         retry_on: any
         command: |
           FILTER=$(python3 Tools/test_shard_filter.py read .integration-filters/shard_${{ matrix.shard }}.filter)

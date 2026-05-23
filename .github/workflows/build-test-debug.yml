@@ -43,7 +43,7 @@ jobs:
     - name: Discover Integration Tests
       run: |
         dotnet test --list-tests --no-build --configuration DebugOpt Content.IntegrationTests/Content.IntegrationTests.csproj 2>&1 | \
-          python3 Tools/test_shard_filter.py generate 8 .integration-filters
+          python3 Tools/test_shard_filter.py generate 16 .integration-filters
 
     - name: Archive build output
       run: tar czf /tmp/build.tar.gz --exclude='.git' .

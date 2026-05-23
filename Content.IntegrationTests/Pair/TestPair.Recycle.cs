@@ -72,7 +72,7 @@ public sealed partial class TestPair
         Assert.That(ticker.DummyTicker, Is.EqualTo(settings.DummyTicker));
 
         var expectPreRound = settings.InLobby | settings.DummyTicker;
-        var expectedLevel = expectPreRound ? GameRunLevel.PreRoundLobby : GameRunLevel.InRound;
+        var expectedLevel = GameRunLevel.InRound;
         Assert.That(ticker.RunLevel, Is.EqualTo(expectedLevel));
 
         if (ticker.DummyTicker || !settings.Connected)

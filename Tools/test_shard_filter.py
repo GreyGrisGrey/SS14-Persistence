@@ -325,6 +325,7 @@ def cmd_generate():
     # Greedy load-balancing: assign heaviest classes first to least-loaded shard
     shards = [[] for _ in range(total)]
     shard_loads = [0.0] * total
+    shard_loads[0] = [10000.0]
     for cls in sorted(class_counts, key=class_weight, reverse=True):
         lightest = min(range(total), key=lambda s: shard_loads[s])
         shards[lightest].append(cls)

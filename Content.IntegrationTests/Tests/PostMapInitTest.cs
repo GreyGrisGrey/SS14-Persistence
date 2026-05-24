@@ -166,6 +166,7 @@ namespace Content.IntegrationTests.Tests
 
         [Test]
         [TestCaseSource(nameof(AllMapFiles))]
+        [Ignore("Well, it's counterintuitive to avoid saved post initialization maps in the post initialization map server")]
         public async Task NoSavedPostMapInitTest(ResPath map)
         {
             await using var pair = await PoolManager.GetServerClient();

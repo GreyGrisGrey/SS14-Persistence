@@ -26,6 +26,7 @@ namespace Content.IntegrationTests.Tests
         }
 
         [Test]
+        [Ignore("Round no end, why have")]
         public async Task Test()
         {
             await using var pair = await PoolManager.GetServerClient(new PoolSettings

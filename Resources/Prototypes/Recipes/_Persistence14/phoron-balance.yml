@@ -14,10 +14,10 @@
   - Stir
   reactants:
     Plasma: 
-      amount: 2
+      amount: 10
     Bananium: 
-      amount: 2
+      amount: 10
     Titanium:
-      amount: 1
+      amount: 5
   products:
-    Phoron: .2
+    Phoron: 1

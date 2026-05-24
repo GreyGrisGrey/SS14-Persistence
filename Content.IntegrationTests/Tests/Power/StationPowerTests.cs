@@ -36,7 +36,6 @@ public sealed class StationPowerTests
         "Exo",
     ];
 
-    [Explicit]
     [Test, TestCaseSource(nameof(GameMaps))]
     public async Task TestStationStartingPowerWindow(string mapProtoId)
     {
